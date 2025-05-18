@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="400" height="250" viewBox="0 0 400 250">
-  <rect width="400" height="250" fill="#6c757d" rx="5" ry="5"/>
-  <circle cx="200" cy="100" r="50" fill="#007bff"/>
-  <rect x="100" y="150" width="200" height="50" fill="#e9ecef" rx="5" ry="5"/>
-  <text x="120" y="185" font-family="Arial" font-size="20" font-weight="bold" fill="#212529">Music Production</text>
-  <path d="M150,80 C150,50 250,50 250,80" stroke="#212529" stroke-width="3" fill="none"/>
-  <path d="M150,120 C150,150 250,150 250,120" stroke="#212529" stroke-width="3" fill="none"/>
-</svg>

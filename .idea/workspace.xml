@@ -4,21 +4,30 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="13be34ff-8b15-4b10-9803-6b03f1fd25b4" name="Changes" comment="updated git ignore">
-      <change afterPath="$PROJECT_DIR$/blog/static/css/blog.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/blog/static/css/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/blog/templates/blog/base.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/blog/templates/blog/pagination.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/blog/templates/blog/post/detail.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/blog/templates/blog/post/list.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/blog/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/f323fb80-1315-44dd-82ba-78edc0a116db.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/f323fb80-1315-44dd-82ba-78edc0a116db.xml" afterDir="false" />
+    <list default="true" id="13be34ff-8b15-4b10-9803-6b03f1fd25b4" name="Changes" comment="misc">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/TODO.txt" beforeDir="false" afterPath="$PROJECT_DIR$/docs/TODO.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/music_beta/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/music_beta/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/static/css/blog.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/static/css/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/static/images/blog-1.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/static/images/blog-2.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/static/images/blog-3.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/static/images/hero-image.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/static/images/logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/static/js/main.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/templates/blog/base.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/templates/blog/pagination.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/templates/blog/post/detail.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/templates/blog/post/list.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tfn_ctv/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/tfn_ctv/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tfn_ctv/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/tfn_ctv/urls.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -33,9 +42,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Task" />
-        <option value="Python Script" />
         <option value="CSS File" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -80,7 +89,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -95,6 +104,10 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/blog" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/blog/templates/blog" />
+      <recent name="$PROJECT_DIR$/blog/templates/blog/post" />
     </key>
   </component>
   <component name="RunManager">
@@ -142,7 +155,7 @@
       <workItem from="1747073407590" duration="11927000" />
       <workItem from="1747536119906" duration="308000" />
       <workItem from="1747536456126" duration="485000" />
-      <workItem from="1747536983759" duration="12608000" />
+      <workItem from="1747536983759" duration="18820000" />
     </task>
     <task id="LOCAL-00001" summary="Add initial structure with styling, scripts, and templates&#10;&#10;This commit introduces the foundational structure for the project, including static assets like CSS, JavaScript, and SVGs, along with Django views and templates. It establishes the base layout, homepage, and core sections for streamlined media services.">
       <option name="closed" value="true" />
@@ -216,7 +229,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747542300495</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="misc">
+      <option name="closed" value="true" />
+      <created>1747558782925</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1747558782925</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -241,6 +262,7 @@
     <MESSAGE value="Add initial blog app structure&#10;&#10;Set up the foundational structure for the blog app with Django. Included are essential files: models, admin, views, tests, migrations, and app configuration." />
     <MESSAGE value="Add blog app with models, migration, and admin integration&#10;&#10;This commit introduces the initial structure for the blog app in Django. It includes a `Post` model, its corresponding migration, admin registration, and necessary configuration updates to settings. The app sets up the foundation for managing blog posts in the project." />
     <MESSAGE value="updated git ignore" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated git ignore" />
+    <MESSAGE value="misc" />
+    <option name="LAST_COMMIT_MESSAGE" value="misc" />
   </component>
 </project>
