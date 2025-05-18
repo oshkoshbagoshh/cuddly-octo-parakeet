@@ -4,31 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="13be34ff-8b15-4b10-9803-6b03f1fd25b4" name="Changes" comment="misc">
+    <list default="true" id="13be34ff-8b15-4b10-9803-6b03f1fd25b4" name="Changes" comment="Remove blog app and associated assets.&#10;&#10;Deleted the &quot;blog&quot; app along with its models, templates, static assets, and frontend scripts. This removes all related functionality, migrations, and configuration tied to the blog.">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/f323fb80-1315-44dd-82ba-78edc0a116db.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/f323fb80-1315-44dd-82ba-78edc0a116db.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/apps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/static/css/blog.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/static/css/style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/static/images/blog-1.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/static/images/blog-2.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/static/images/blog-3.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/static/images/hero-image.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/static/images/logo.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/static/js/main.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/templates/blog/base.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/templates/blog/pagination.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/templates/blog/post/detail.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/templates/blog/post/list.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/views.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tfn_ctv/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/tfn_ctv/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tfn_ctv/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/tfn_ctv/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/music_beta/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/music_beta/tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/music_beta/tests/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/music_beta/tests/test_models.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,12 +38,12 @@
     &quot;assignee&quot;: &quot;oshkoshbagoshh&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "git@github.com:oshkoshbagoshh/cuddly-octo-parakeet.git",
-    "accountId": "f08c3f6e-c0cb-4226-befc-afc319c9ef13"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;git@github.com:oshkoshbagoshh/cuddly-octo-parakeet.git&quot;,
+    &quot;accountId&quot;: &quot;f08c3f6e-c0cb-4226-befc-afc319c9ef13&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
 }</component>
@@ -71,36 +52,36 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.pycharm.django.structure.promotion.once.per.project": "true",
-    "django.template.preview.state": "SHOW_EDITOR_AND_PREVIEW",
-    "git-widget-placeholder": "main",
-    "junie.onboarding.icon.badge.shown": "true",
-    "last_opened_file_path": "/Users/aj/PycharmProjects/tfn_ctv/blog",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenDjangoStructureViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.pycharm.django.structure.promotion.once.per.project&quot;: &quot;true&quot;,
+    &quot;django.template.preview.state&quot;: &quot;SHOW_EDITOR_AND_PREVIEW&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/aj/PycharmProjects/tfn_ctv/blog&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "sqlite"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;sqlite&quot;
     ],
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "TEXT"
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;TEXT&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/blog" />
@@ -155,7 +136,8 @@
       <workItem from="1747073407590" duration="11927000" />
       <workItem from="1747536119906" duration="308000" />
       <workItem from="1747536456126" duration="485000" />
-      <workItem from="1747536983759" duration="18820000" />
+      <workItem from="1747536983759" duration="19842000" />
+      <workItem from="1747577452062" duration="560000" />
     </task>
     <task id="LOCAL-00001" summary="Add initial structure with styling, scripts, and templates&#10;&#10;This commit introduces the foundational structure for the project, including static assets like CSS, JavaScript, and SVGs, along with Django views and templates. It establishes the base layout, homepage, and core sections for streamlined media services.">
       <option name="closed" value="true" />
@@ -237,7 +219,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747558782925</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Remove blog app and associated assets.&#10;&#10;Deleted the &quot;blog&quot; app along with its models, templates, static assets, and frontend scripts. This removes all related functionality, migrations, and configuration tied to the blog.">
+      <option name="closed" value="true" />
+      <created>1747564627893</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1747564627893</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -263,6 +253,7 @@
     <MESSAGE value="Add blog app with models, migration, and admin integration&#10;&#10;This commit introduces the initial structure for the blog app in Django. It includes a `Post` model, its corresponding migration, admin registration, and necessary configuration updates to settings. The app sets up the foundation for managing blog posts in the project." />
     <MESSAGE value="updated git ignore" />
     <MESSAGE value="misc" />
-    <option name="LAST_COMMIT_MESSAGE" value="misc" />
+    <MESSAGE value="Remove blog app and associated assets.&#10;&#10;Deleted the &quot;blog&quot; app along with its models, templates, static assets, and frontend scripts. This removes all related functionality, migrations, and configuration tied to the blog." />
+    <option name="LAST_COMMIT_MESSAGE" value="Remove blog app and associated assets.&#10;&#10;Deleted the &quot;blog&quot; app along with its models, templates, static assets, and frontend scripts. This removes all related functionality, migrations, and configuration tied to the blog." />
   </component>
 </project>
