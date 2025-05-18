@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'music_beta.apps.MusicBetaConfig',
+    'blog.apps.BlogConfig',
 ]
 
 MIDDLEWARE = [
