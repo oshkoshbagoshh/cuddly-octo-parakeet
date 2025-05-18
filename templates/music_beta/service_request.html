@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block title %}Request Services - TFN Media{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="mb-0">Request Services</h2>
+                </div>
+                <div class="card-body">
+                    {% if success %}
+                        <div class="alert alert-success" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endif %}
+                    
+                    <p class="lead mb-4">Fill out the form below to request our services. We'll get back to you as soon as possible.</p>
+                    
+                    <form method="post" action="{% url 'service_request' %}">
+                        {% csrf_token %}
+                        
+                        <div class="mb-3">
+                            <label for="{{ form.name.id_for_label }}" class="form-label">Name</label>
+                            {{ form.name }}
+                            {% if form.name.errors %}
+                                <div class="text-danger">{{ form.name.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="{{ form.email.id_for_label }}" class="form-label">Email</label>
+                            {{ form.email }}
+                            {% if form.email.errors %}
+                                <div class="text-danger">{{ form.email.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="{{ form.company.id_for_label }}" class="form-label">Company</label>
+                            {{ form.company }}
+                            {% if form.company.errors %}
+                                <div class="text-danger">{{ form.company.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="{{ form.service_type.id_for_label }}" class="form-label">Service Type</label>
+                            {{ form.service_type }}
+                            {% if form.service_type.errors %}
+                                <div class="text-danger">{{ form.service_type.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="{{ form.message.id_for_label }}" class="form-label">Message (Optional)</label>
+                            {{ form.message }}
+                            {% if form.message.errors %}
+                                <div class="text-danger">{{ form.message.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">Submit Request</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

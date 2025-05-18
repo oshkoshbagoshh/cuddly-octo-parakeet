@@ -1,0 +1,437 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}TFN Media - Home{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section id="hero" class="py-5 bg-primary text-white">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h1 class="display-4 fw-bold">Welcome to TFN Media</h1>
+                <p class="lead">Professional media services for all your needs</p>
+                <div class="mt-3">
+                    <a href="#signup-section" class="btn btn-light btn-lg me-2">Sign Up</a>
+                    <a href="#search-section" class="btn btn-outline-light btn-lg">Search</a>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <img src="{% static 'images/hero-image.svg' %}" alt="Hero Image" class="img-fluid">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Search Section -->
+<section id="search-section" class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold">Search</h2>
+            <p class="lead">Find music, artists, and ad campaigns</p>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <form id="search-form" class="mb-4">
+                    <div class="input-group">
+                        <input type="text" id="search-input" class="form-control form-control-lg" placeholder="Search for artists, albums, tracks, or ad campaigns">
+                        <button class="btn btn-primary" type="submit">
+                            <i class="bi bi-search"></i> Search
+                        </button>
+                    </div>
+                </form>
+                <div id="search-results">
+                    <!-- Search results will be displayed here -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Signup and Ad Campaign Section -->
+<section id="signup-section" class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold">Sign Up & Upload Ad Campaign</h2>
+            <p class="lead">Join our platform and share your ad campaigns</p>
+        </div>
+        <div class="row">
+            <!-- Signup Form -->
+            <div id="signup-container" class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-header bg-primary text-white">
+                        <h3 class="card-title h5 mb-0">Create an Account</h3>
+                    </div>
+                    <div class="card-body">
+                        <div id="signup-success" class="alert alert-success" style="display: none;"></div>
+                        <div id="signup-error" class="alert alert-danger" style="display: none;"></div>
+                        <form id="signup-form">
+                            <div class="mb-3">
+                                {{ signup_form.username.label_tag }}
+                                {{ signup_form.username }}
+                                <div class="invalid-feedback">Please enter a username.</div>
+                            </div>
+                            <div class="mb-3">
+                                {{ signup_form.email.label_tag }}
+                                {{ signup_form.email }}
+                                <div class="invalid-feedback">Please enter a valid email address.</div>
+                            </div>
+                            <div class="mb-3">
+                                {{ signup_form.password.label_tag }}
+                                {{ signup_form.password }}
+                                <div class="invalid-feedback">Please enter a password.</div>
+                            </div>
+                            <div class="mb-3">
+                                {{ signup_form.confirm_password.label_tag }}
+                                {{ signup_form.confirm_password }}
+                                <div id="password-mismatch" class="invalid-feedback" style="display: none;">Passwords do not match.</div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Sign Up</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ad Campaign Upload Form -->
+            <div id="ad-campaign-container" class="col-md-6" style="display: none;">
+                <div class="card h-100">
+                    <div class="card-header bg-primary text-white">
+                        <h3 class="card-title h5 mb-0">Upload Ad Campaign</h3>
+                    </div>
+                    <div class="card-body">
+                        <div id="ad-campaign-success" class="alert alert-success" style="display: none;"></div>
+                        <div id="ad-campaign-error" class="alert alert-danger" style="display: none;"></div>
+                        <form id="ad-campaign-form">
+                            <div class="mb-3">
+                                {{ ad_campaign_form.title.label_tag }}
+                                {{ ad_campaign_form.title }}
+                                <div class="invalid-feedback">Please enter a title.</div>
+                            </div>
+                            <div class="mb-3">
+                                {{ ad_campaign_form.description.label_tag }}
+                                {{ ad_campaign_form.description }}
+                                <div class="invalid-feedback">Please enter a description.</div>
+                            </div>
+                            <div class="mb-3">
+                                {{ ad_campaign_form.video.label_tag }}
+                                {{ ad_campaign_form.video }}
+                                <div class="invalid-feedback">Please upload a video.</div>
+                                <small class="form-text text-muted">For demo purposes, a placeholder video will be used.</small>
+                            </div>
+                            <div class="mb-3">
+                                {{ ad_campaign_form.genre.label_tag }}
+                                {{ ad_campaign_form.genre }}
+                                <div class="invalid-feedback">Please select a genre.</div>
+                            </div>
+                            <div class="mb-3">
+                                {{ ad_campaign_form.mood.label_tag }}
+                                {{ ad_campaign_form.mood }}
+                                <div class="invalid-feedback">Please select a mood.</div>
+                            </div>
+                            <div class="mb-3">
+                                {{ ad_campaign_form.target_audience.label_tag }}
+                                {{ ad_campaign_form.target_audience }}
+                                <div class="invalid-feedback">Please select a target audience.</div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Upload Campaign</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Services Section -->
+<section id="services" class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold">TFN Media Services</h2>
+            <p class="lead">Comprehensive media solutions for your business</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <i class="bi bi-music-note-beamed fs-1 text-primary mb-3"></i>
+                        <h3 class="card-title">Music Production</h3>
+                        <p class="card-text">Professional music production services including recording, mixing, and mastering.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <i class="bi bi-camera-video fs-1 text-primary mb-3"></i>
+                        <h3 class="card-title">Video Production</h3>
+                        <p class="card-text">High-quality video production for commercials, music videos, and corporate content.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <i class="bi bi-camera fs-1 text-primary mb-3"></i>
+                        <h3 class="card-title">Photography</h3>
+                        <p class="card-text">Professional photography services for events, portraits, and commercial use.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section id="testimonials" class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold">What Our Clients Say</h2>
+            <p class="lead">Hear from those who have worked with us</p>
+        </div>
+        <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="card">
+                        <div class="card-body text-center p-5">
+                            <p class="lead">"TFN Media delivered exceptional quality for our music project. Their team was professional and responsive throughout the process."</p>
+                            <div class="d-flex justify-content-center mt-3">
+                                <div>
+                                    <h5 class="mb-1">John Smith</h5>
+                                    <p class="text-muted mb-0">Recording Artist</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="card">
+                        <div class="card-body text-center p-5">
+                            <p class="lead">"The video production team at TFN Media exceeded our expectations. The final product was exactly what we envisioned."</p>
+                            <div class="d-flex justify-content-center mt-3">
+                                <div>
+                                    <h5 class="mb-1">Sarah Johnson</h5>
+                                    <p class="text-muted mb-0">Marketing Director</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="card">
+                        <div class="card-body text-center p-5">
+                            <p class="lead">"The photography services provided by TFN Media were outstanding. They captured our event perfectly."</p>
+                            <div class="d-flex justify-content-center mt-3">
+                                <div>
+                                    <h5 class="mb-1">Michael Brown</h5>
+                                    <p class="text-muted mb-0">Event Coordinator</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- About Us Section -->
+<section id="about" class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold">About Us</h2>
+            <p class="lead">Learn more about TFN Media</p>
+        </div>
+        <div class="row align-items-center mb-5">
+            <div class="col-md-6">
+                <h3>Company Overview</h3>
+                <p>TFN Media is a full-service media production company specializing in music production, video production, and photography. We are dedicated to delivering high-quality media solutions for businesses and individuals.</p>
+                <h3 class="mt-4">Our Mission</h3>
+                <p>Our mission is to empower creators and businesses with cutting-edge media solutions that captivate audiences and drive engagement. We believe in the power of storytelling through various media formats and strive to help our clients tell their stories in the most compelling way possible.</p>
+                <h3 class="mt-4">Company History</h3>
+                <p>Founded in 2015, TFN Media began as a small music production studio in Nashville. Over the years, we've expanded our services to include video production, photography, and digital marketing. Today, we serve clients across the United States and have established ourselves as a leader in the media production industry.</p>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title">About Nathan</h3>
+                        <p class="card-text">Nathan is the founder and creative director of TFN Media. With over 10 years of experience in the industry, he has worked with numerous clients to bring their visions to life through various media formats.</p>
+                        <p class="card-text">His passion for media production and commitment to excellence has established TFN Media as a trusted name in the industry. Nathan holds a degree in Audio Engineering from Belmont University and has worked with Grammy-winning artists throughout his career.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <h3 class="text-center mb-4">Our Team</h3>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <i class="bi bi-person-circle fs-1 text-primary mb-3"></i>
+                        <h4 class="card-title">Sarah Johnson</h4>
+                        <p class="text-muted">Head of Video Production</p>
+                        <p class="card-text">Sarah brings over 8 years of experience in video production, having worked on commercials, music videos, and documentaries. Her creative vision and technical expertise ensure that every video project exceeds client expectations.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <i class="bi bi-person-circle fs-1 text-primary mb-3"></i>
+                        <h4 class="card-title">Michael Rodriguez</h4>
+                        <p class="text-muted">Lead Audio Engineer</p>
+                        <p class="card-text">Michael is our lead audio engineer with a passion for creating immersive soundscapes. His technical knowledge and musical background make him an invaluable asset to our music production team.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <i class="bi bi-person-circle fs-1 text-primary mb-3"></i>
+                        <h4 class="card-title">Emily Chen</h4>
+                        <p class="text-muted">Photography Director</p>
+                        <p class="card-text">Emily leads our photography department with an eye for detail and composition. Her work has been featured in major publications, and she brings a unique perspective to every photography project.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section id="faq" class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold">Frequently Asked Questions</h2>
+            <p class="lead">Find answers to common questions about our services</p>
+        </div>
+        <div class="accordion" id="faqAccordion">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        What services does TFN Media offer?
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        TFN Media offers a range of services including music production, video production, and photography. Our team of professionals is equipped to handle projects of various scales and complexities.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        How much do your services cost?
+                    </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        Our pricing varies depending on the specific requirements of each project. We offer customized quotes based on the scope, timeline, and resources needed. Contact us for a detailed quote for your project.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        How long does a typical project take to complete?
+                    </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        The timeline for project completion depends on various factors including the complexity of the project, the availability of resources, and the specific requirements. We work closely with our clients to establish realistic timelines and ensure timely delivery.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold">Contact Us</h2>
+            <p class="lead">Get in touch with our team</p>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <form>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name" placeholder="Your Name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="Your Email">
+                    </div>
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Message</label>
+                        <textarea class="form-control" id="message" rows="5" placeholder="Your Message"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h3 class="card-title">Schedule a Meeting</h3>
+                        <p class="card-text">Book a time to discuss your project with our team.</p>
+                        <div class="calendly-inline-widget" data-url="https://calendly.com/tfnmedia" style="min-width:320px;height:400px;"></div>
+                        <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Blog Section -->
+<section id="blog" class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold">Latest Posts</h2>
+            <p class="lead">Stay updated with our blog</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <img src="{% static 'images/blog-1.svg' %}" class="card-img-top" alt="Blog Post 1">
+                    <div class="card-body">
+                        <h3 class="card-title">The Future of Music Production</h3>
+                        <p class="card-text">Exploring the latest trends and technologies in music production.</p>
+                        <a href="#" class="btn btn-outline-primary">Read More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <img src="{% static 'images/blog-2.svg' %}" class="card-img-top" alt="Blog Post 2">
+                    <div class="card-body">
+                        <h3 class="card-title">Video Production Tips</h3>
+                        <p class="card-text">Essential tips for creating high-quality video content.</p>
+                        <a href="#" class="btn btn-outline-primary">Read More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <img src="{% static 'images/blog-3.svg' %}" class="card-img-top" alt="Blog Post 3">
+                    <div class="card-body">
+                        <h3 class="card-title">Photography Essentials</h3>
+                        <p class="card-text">Key principles for capturing stunning photographs.</p>
+                        <a href="#" class="btn btn-outline-primary">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

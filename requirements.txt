@@ -1,0 +1,14 @@
+# Django
+Django>=5.2.1
+
+# Faker for generating fake data
+Faker>=19.3.0
+
+# Requests for fetching images from Unsplash
+requests>=2.31.0
+
+# Python-dotenv for loading environment variables
+python-dotenv>=1.0.0
+
+# Mutagen for ID3 metadata extraction
+mutagen>=1.47.0

@@ -1,0 +1,355 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}TFN Media - CTV Music Platform{% endblock %}
+
+{% block content %}
+<!-- Scroll to Top Button -->
+<button id="scroll-to-top" class="btn btn-primary rounded-circle position-fixed" style="bottom: 20px; right: 20px; display: none; z-index: 1000; width: 50px; height: 50px;">
+    <i class="bi bi-arrow-up"></i>
+</button>
+<!-- Music Platform Header -->
+<section id="music-header" class="py-5 bg-primary text-white">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h1 class="display-4 fw-bold">CTV Music Platform</h1>
+                <p class="lead">Discover and enjoy music from various genres</p>
+            </div>
+            <div class="col-md-6">
+                <img src="{% static 'images/hero-image.svg' %}" alt="Music Platform" class="img-fluid">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Music Player Section -->
+<section id="music-player" class="py-5">
+    <div class="container">
+        <div class="row">
+            <!-- Genres Sidebar -->
+            <div class="col-md-3">
+                <!-- Search Bar -->
+                <div class="card mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h3 class="card-title h5 mb-0">Search</h3>
+                    </div>
+                    <div class="card-body">
+                        <form id="search-form" class="mb-2">
+                            <div class="input-group">
+                                <input type="text" id="search-input" class="form-control" placeholder="Search...">
+                                <button class="btn btn-primary" type="submit">
+                                    <i class="bi bi-search"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h3 class="card-title h5 mb-0">Genres</h3>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <a href="#" class="text-decoration-none genre-filter" data-genre="all">All Genres</a>
+                            </li>
+                            {% for genre in genres %}
+                            <li class="list-group-item">
+                                <a href="#" class="text-decoration-none genre-filter" data-genre="{{ genre.name }}">{{ genre.name }}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h3 class="card-title h5 mb-0">Artists</h3>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <div class="d-flex align-items-center">
+                                    <a href="#" class="text-decoration-none artist-filter" data-artist="all">All Artists</a>
+                                </div>
+                            </li>
+                            {% for artist in artists %}
+                            <li class="list-group-item">
+                                <div class="d-flex align-items-center">
+                                    <div class="artist-image-container me-2" style="width: 40px; height: 40px; overflow: hidden; border-radius: 50%;">
+                                        <img src="{{ artist.image_url }}" alt="{{ artist.name }}" class="img-fluid">
+                                    </div>
+                                    <a href="#" class="text-decoration-none artist-filter" data-artist="{{ artist.name }}">{{ artist.name }}</a>
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-9">
+                <!-- Trending Now -->
+                <div class="card mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h3 class="card-title h5 mb-0">Trending Now</h3>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="list-group list-group-flush">
+                            {% for track in trending_tracks %}
+                            <a href="#" class="list-group-item list-group-item-action trending-track" 
+                               data-audio="{{ track.audio_file }}" 
+                               data-title="{{ track.title }}" 
+                               data-artist="{{ track.artist.name }}" 
+                               data-album="{{ track.album.title }}"
+                               data-id="{{ track.id }}">
+                                <div class="d-flex w-100 justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="mb-1">{{ track.title }}</h6>
+                                        <small>{{ track.artist.name }} - {{ track.album.title }}</small>
+                                    </div>
+                                    <span class="badge bg-primary rounded-pill">{{ track.play_count }} plays</span>
+                                </div>
+                            </a>
+                            {% empty %}
+                            <div class="list-group-item">
+                                <p class="mb-0 text-muted">No trending tracks yet. Start playing some music!</p>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Now Playing -->
+                <div class="card mb-4 music-player-card">
+                    <div class="card-header bg-primary text-white">
+                        <h3 class="card-title h5 mb-0">Now Playing</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-4">
+                                <img src="https://picsum.photos/300" alt="Album Cover" class="img-fluid rounded">
+                            </div>
+                            <div class="col-md-8">
+                                <h4 id="current-track-title">Select a track to play</h4>
+                                <p id="current-track-artist" class="text-muted">Artist</p>
+                                <p id="current-track-album" class="text-muted">Album</p>
+
+                                <div class="audio-player mt-3">
+                                    <audio id="audio-player" controls class="w-100">
+                                        <source src="" type="audio/mpeg">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Albums -->
+                <h2 class="mb-4">Albums</h2>
+                <div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
+                    {% for album in albums %}
+                    <div class="col album-item" 
+                         data-artist="{{ album.artist.name }}" 
+                         data-genres="{% for genre in album.genre.all %}{{ genre.name }}{% if not forloop.last %},{% endif %}{% endfor %}">
+                        <div class="card h-100 album-card">
+                            <img src="{{ album.cover_image_url }}" class="card-img-top" alt="{{ album.title }}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ album.title }}</h5>
+                                <p class="card-text">{{ album.artist.name }}</p>
+                                <p class="card-text">
+                                    <small class="text-muted">
+                                        {% for genre in album.genre.all %}
+                                            <span class="badge bg-secondary genre-badge" data-genre="{{ genre.name }}">{{ genre.name }}</span>
+                                        {% endfor %}
+                                    </small>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <!-- Tracks -->
+                <h2 class="mb-4">Tracks</h2>
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h3 class="card-title h5 mb-0">All Tracks</h3>
+                    </div>
+                    <div class="card-body p-0">
+                        <table class="table table-hover mb-0">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Title</th>
+                                    <th scope="col">Artist</th>
+                                    <th scope="col">Album</th>
+                                    <th scope="col">Duration</th>
+                                    <th scope="col">Play</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for track in tracks %}
+                                <tr class="track-row" 
+                                    data-audio="{{ track.audio_file }}" 
+                                    data-title="{{ track.title }}" 
+                                    data-artist="{{ track.artist.name }}" 
+                                    data-album="{{ track.album.title }}"
+                                    data-genres="{% for genre in track.album.genre.all %}{{ genre.name }}{% if not forloop.last %},{% endif %}{% endfor %}"
+                                    data-id="{{ track.id }}">
+                                    <th scope="row">{{ forloop.counter }}</th>
+                                    <td>{{ track.title }}</td>
+                                    <td>{{ track.artist.name }}</td>
+                                    <td>{{ track.album.title }}</td>
+                                    <td>{{ track.duration }}</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary play-btn">
+                                            <i class="bi bi-play-fill"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Future Features Section -->
+<section id="future-features" class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold">Coming Soon</h2>
+            <p class="lead">Future features powered by machine learning</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <i class="bi bi-music-note-list fs-1 text-primary mb-3"></i>
+                        <h3 class="card-title">Smart Playlists</h3>
+                        <p class="card-text">AI-generated playlists based on your listening habits and preferences.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <i class="bi bi-soundwave fs-1 text-primary mb-3"></i>
+                        <h3 class="card-title">Genre Classification</h3>
+                        <p class="card-text">Automatic genre classification using machine learning algorithms.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <i class="bi bi-graph-up fs-1 text-primary mb-3"></i>
+                        <h3 class="card-title">Mood Analysis</h3>
+                        <p class="card-text">Analyze the mood of songs and recommend music based on your current mood.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Login Required Modal -->
+<div class="modal fade" id="loginRequiredModal" tabindex="-1" aria-labelledby="loginRequiredModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="loginRequiredModalLabel">Login Required</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>You need to be logged in to play music. Please sign up or log in to continue.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <a href="{% url 'home' %}#signup" class="btn btn-primary">Sign Up / Login</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript for the music player -->
+<script>
+    $(document).ready(function() {
+        const audioPlayer = $('#audio-player')[0];
+        const currentTrackTitle = $('#current-track-title');
+        const currentTrackArtist = $('#current-track-artist');
+        const currentTrackAlbum = $('#current-track-album');
+
+        // Check if user is logged in (this is a simplified check, in a real app you'd use server-side auth)
+        const isLoggedIn = localStorage.getItem('currentUser') !== null;
+
+        // Add click event to all play buttons
+        $('.play-btn').on('click', function() {
+            const trackRow = $(this).closest('.track-row');
+            const audioSrc = trackRow.data('audio');
+            const title = trackRow.data('title');
+            const artist = trackRow.data('artist');
+            const album = trackRow.data('album');
+
+            // Check if user is logged in
+            if (!isLoggedIn) {
+                // Show login required modal
+                const loginModal = new bootstrap.Modal(document.getElementById('loginRequiredModal'));
+                loginModal.show();
+                return;
+            }
+
+            // Update the audio player
+            audioPlayer.src = audioSrc;
+            audioPlayer.load();
+            audioPlayer.play();
+
+            // Update the now playing information
+            currentTrackTitle.text(title);
+            currentTrackArtist.text(artist);
+            currentTrackAlbum.text(album);
+        });
+
+        // Add click event to trending tracks
+        $('.trending-track').on('click', function(e) {
+            e.preventDefault();
+
+            // Check if user is logged in
+            if (!isLoggedIn) {
+                // Show login required modal
+                const loginModal = new bootstrap.Modal(document.getElementById('loginRequiredModal'));
+                loginModal.show();
+                return;
+            }
+
+            const audioSrc = $(this).data('audio');
+            const title = $(this).data('title');
+            const artist = $(this).data('artist');
+            const album = $(this).data('album');
+
+            // Update the audio player
+            audioPlayer.src = audioSrc;
+            audioPlayer.load();
+            audioPlayer.play();
+
+            // Update the now playing information
+            currentTrackTitle.text(title);
+            currentTrackArtist.text(artist);
+            currentTrackAlbum.text(album);
+        });
+
+        // Add search results container after the search form
+        if ($('#search-form').length && !$('#search-results').length) {
+            $('#search-form').after('<div id="search-results" class="mt-3"></div>');
+        }
+    });
+</script>
+{% endblock %}

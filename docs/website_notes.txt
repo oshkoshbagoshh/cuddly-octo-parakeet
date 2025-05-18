@@ -1,0 +1,33 @@
+TFN Branding - Notes
+
+Color Palette:
+440381 - Indigo
+8338EC - Blue Violet
+51E5FF - Electric Blue
+0056BF - Sapphire
+100B00 - Smoky Black
+
+
+
+Font:
+Logo/Header - Rubik One Bold
+Body - Open Sans
+
+IGNORE THIS:
+Website Draft: https://www.canva.com/design/DAGMh0e3CW4/A6VWLL8WXph0rRRHWmC3bQ/edit?utm_content=DAGMh0e3CW4&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
+
+
+
+
+
+Ashkan’s Notes
+
+
+
+Planning a Web App: The Basics (Initial Site Needs as of August 2024):
+What is my app’s functionality? (examples: logging in/out, adding a spreadsheet, filling out a form, viewing a product wish list, viewing current products, etc.)
+Filling out a form to request services
+Name/Email/Company
+Drop Down for Media Solutions or Music Services
+App Functions (examples: handle file uploads, handle form submissions, connect form submissions to the database, data analysis, let users view and interact with products, let users download spreadsheets, handle authentication, etc.)
+Handle Form submissions to send to email (hello@tfnms.co)

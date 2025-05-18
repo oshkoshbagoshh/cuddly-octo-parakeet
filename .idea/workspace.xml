@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="13be34ff-8b15-4b10-9803-6b03f1fd25b4" name="Changes" comment="Add models, migrations, forms, and templates for core features&#10;&#10;This commit introduces models for `ServiceRequest`, `User`, and updates existing models to support file uploads (e.g., artist images, album covers, audio files). It also adds forms for service requests, user signup, and ad campaign creation. New templates for service requests and enhanced JavaScript functionality (e.g., form validation, search, and music player) are included.">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Task" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;oshkoshbagoshh&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;git@github.com:oshkoshbagoshh/super-funicular.git&quot;,
+    &quot;accountId&quot;: &quot;d5cbcc2a-a23e-403d-ac78-f39f5aa95cbc&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="2x0S8glZ3HSrAmptnn5D2hWnTau" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenDjangoStructureViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;django.template.preview.state&quot;: &quot;SHOW_EDITOR_AND_PREVIEW&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/aj/PycharmProjects/tfn_ctv&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;sqlite&quot;
+    ],
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;TEXT&quot;
+    ]
+  }
+}</component>
+  <component name="RunManager">
+    <configuration name="tfn_ctv" type="Python.DjangoServer" factoryName="Django server">
+      <module name="tfn_ctv" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8000" />
+      <option name="host" value="" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="false" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-6a121458b545-JavaScript-PY-251.25410.159" />
+        <option value="bundled-python-sdk-e0ed3721d81e-36ea0e71a18c-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-251.25410.159" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="13be34ff-8b15-4b10-9803-6b03f1fd25b4" name="Changes" comment="" />
+      <created>1747073339476</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1747073339476</updated>
+      <workItem from="1747073340531" duration="60000" />
+      <workItem from="1747073407590" duration="11927000" />
+      <workItem from="1747536119906" duration="308000" />
+      <workItem from="1747536456126" duration="485000" />
+      <workItem from="1747536983759" duration="1630000" />
+    </task>
+    <task id="LOCAL-00001" summary="Add initial structure with styling, scripts, and templates&#10;&#10;This commit introduces the foundational structure for the project, including static assets like CSS, JavaScript, and SVGs, along with Django views and templates. It establishes the base layout, homepage, and core sections for streamlined media services.">
+      <option name="closed" value="true" />
+      <created>1747077004120</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1747077004120</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Initialize Django apps and project structure&#10;&#10;Added initial `__init__.py`, `apps.py`, and other setup files for `ad_spend`, `music_beta`, and `tfn_ctv` apps. Included ASGI configuration for `tfn_ctv` and IntelliJ database source configuration.">
+      <option name="closed" value="true" />
+      <created>1747080013243</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1747080013243</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Add models, migrations, forms, and templates for core features&#10;&#10;This commit introduces models for `ServiceRequest`, `User`, and updates existing models to support file uploads (e.g., artist images, album covers, audio files). It also adds forms for service requests, user signup, and ad campaign creation. New templates for service requests and enhanced JavaScript functionality (e.g., form validation, search, and music player) are included.">
+      <option name="closed" value="true" />
+      <created>1747087336405</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1747087336405</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Add models, migrations, forms, and templates for core features&#10;&#10;This commit introduces models for `ServiceRequest`, `User`, and updates existing models to support file uploads (e.g., artist images, album covers, audio files). It also adds forms for service requests, user signup, and ad campaign creation. New templates for service requests and enhanced JavaScript functionality (e.g., form validation, search, and music player) are included.">
+      <option name="closed" value="true" />
+      <created>1747087360951</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1747087360951</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Add initial structure with styling, scripts, and templates&#10;&#10;This commit introduces the foundational structure for the project, including static assets like CSS, JavaScript, and SVGs, along with Django views and templates. It establishes the base layout, homepage, and core sections for streamlined media services." />
+    <MESSAGE value="Initialize Django apps and project structure&#10;&#10;Added initial `__init__.py`, `apps.py`, and other setup files for `ad_spend`, `music_beta`, and `tfn_ctv` apps. Included ASGI configuration for `tfn_ctv` and IntelliJ database source configuration." />
+    <MESSAGE value="Add models, migrations, forms, and templates for core features&#10;&#10;This commit introduces models for `ServiceRequest`, `User`, and updates existing models to support file uploads (e.g., artist images, album covers, audio files). It also adds forms for service requests, user signup, and ad campaign creation. New templates for service requests and enhanced JavaScript functionality (e.g., form validation, search, and music player) are included." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add models, migrations, forms, and templates for core features&#10;&#10;This commit introduces models for `ServiceRequest`, `User`, and updates existing models to support file uploads (e.g., artist images, album covers, audio files). It also adds forms for service requests, user signup, and ad campaign creation. New templates for service requests and enhanced JavaScript functionality (e.g., form validation, search, and music player) are included." />
+  </component>
+</project>

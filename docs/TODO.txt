@@ -1,0 +1,21 @@
+- front end needs way better visual queues (toast message when things happen)
+
+- scroll to the top,
+
+- need type validation on song length (can enter in text instead of number)
+- the filtering and search system needs to be better  ( ie: when I click on an album or genre, it should filter.
+
+- there should be more a sort of "trending now"
+
+- there should be modals for when things happen (ie: try to play a song without being registered or logged in)
+- video upload size limit (to help us save space, please consider pasting in a video url like from youtube or something. We're a start up and server storage space is expensive :D
+
+- for uploading songs, it integrates with id3 package so we can collect the audio metadata on the backend
+
+- (make sure they sign a policies and agreement and stuff =
+
+- cookies (hey we take some of your data, etc)
+
+- dark mode
+
+- shuffle functionality
