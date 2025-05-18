@@ -4,8 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="13be34ff-8b15-4b10-9803-6b03f1fd25b4" name="Changes" comment="Add models, migrations, forms, and templates for core features&#10;&#10;This commit introduces models for `ServiceRequest`, `User`, and updates existing models to support file uploads (e.g., artist images, album covers, audio files). It also adds forms for service requests, user signup, and ad campaign creation. New templates for service requests and enhanced JavaScript functionality (e.g., form validation, search, and music player) are included.">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="13be34ff-8b15-4b10-9803-6b03f1fd25b4" name="Changes" comment="updated git ignore">
+      <change afterPath="$PROJECT_DIR$/blog/static/css/blog.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/blog/static/css/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/blog/templates/blog/base.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/blog/templates/blog/pagination.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/blog/templates/blog/post/detail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/blog/templates/blog/post/list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/blog/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/f323fb80-1315-44dd-82ba-78edc0a116db.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/f323fb80-1315-44dd-82ba-78edc0a116db.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/TODO.txt" beforeDir="false" afterPath="$PROJECT_DIR$/docs/TODO.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/music_beta/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/music_beta/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tfn_ctv/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/tfn_ctv/urls.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +33,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Task" />
+        <option value="Python Script" />
+        <option value="CSS File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -31,12 +48,12 @@
     &quot;assignee&quot;: &quot;oshkoshbagoshh&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;git@github.com:oshkoshbagoshh/super-funicular.git&quot;,
-    &quot;accountId&quot;: &quot;d5cbcc2a-a23e-403d-ac78-f39f5aa95cbc&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "git@github.com:oshkoshbagoshh/cuddly-octo-parakeet.git",
+    "accountId": "f08c3f6e-c0cb-4226-befc-afc319c9ef13"
   }
-}</component>
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
 }</component>
@@ -45,33 +62,41 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenDjangoStructureViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;django.template.preview.state&quot;: &quot;SHOW_EDITOR_AND_PREVIEW&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/aj/PycharmProjects/tfn_ctv&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.pycharm.django.structure.promotion.once.per.project": "true",
+    "django.template.preview.state": "SHOW_EDITOR_AND_PREVIEW",
+    "git-widget-placeholder": "main",
+    "junie.onboarding.icon.badge.shown": "true",
+    "last_opened_file_path": "/Users/aj/PycharmProjects/tfn_ctv/blog",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;sqlite&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "sqlite"
     ],
-    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
-      &quot;TEXT&quot;
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "TEXT"
     ]
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/blog" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="tfn_ctv" type="Python.DjangoServer" factoryName="Django server">
       <module name="tfn_ctv" />
@@ -117,7 +142,7 @@
       <workItem from="1747073407590" duration="11927000" />
       <workItem from="1747536119906" duration="308000" />
       <workItem from="1747536456126" duration="485000" />
-      <workItem from="1747536983759" duration="1630000" />
+      <workItem from="1747536983759" duration="12608000" />
     </task>
     <task id="LOCAL-00001" summary="Add initial structure with styling, scripts, and templates&#10;&#10;This commit introduces the foundational structure for the project, including static assets like CSS, JavaScript, and SVGs, along with Django views and templates. It establishes the base layout, homepage, and core sections for streamlined media services.">
       <option name="closed" value="true" />
@@ -151,7 +176,47 @@
       <option name="project" value="LOCAL" />
       <updated>1747087360951</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Add models, migrations, forms, and templates for core features&#10;&#10;This commit introduces models for `ServiceRequest`, `User`, and updates existing models to support file uploads (e.g., artist images, album covers, audio files). It also adds forms for service requests, user signup, and ad campaign creation. New templates for service requests and enhanced JavaScript functionality (e.g., form validation, search, and music player) are included.">
+      <option name="closed" value="true" />
+      <created>1747539957018</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1747539957018</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Add migrations for music app models and refine file fields&#10;&#10;Initial migrations introduce models for Artist, Genre, Album, Track, User, ServiceRequest, and AdCampaign. Subsequent updates include replacing URL fields with file fields for media uploads, adding new fields (e.g., YouTube URL, track metadata, user agreements), and refining model functionalities.">
+      <option name="closed" value="true" />
+      <created>1747540009395</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1747540009395</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Add initial blog app structure&#10;&#10;Set up the foundational structure for the blog app with Django. Included are essential files: models, admin, views, tests, migrations, and app configuration.">
+      <option name="closed" value="true" />
+      <created>1747541123582</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1747541123582</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Add blog app with models, migration, and admin integration&#10;&#10;This commit introduces the initial structure for the blog app in Django. It includes a `Post` model, its corresponding migration, admin registration, and necessary configuration updates to settings. The app sets up the foundation for managing blog posts in the project.">
+      <option name="closed" value="true" />
+      <created>1747542241971</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1747542241971</updated>
+    </task>
+    <task id="LOCAL-00009" summary="updated git ignore">
+      <option name="closed" value="true" />
+      <created>1747542300495</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1747542300495</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -172,6 +237,10 @@
     <MESSAGE value="Add initial structure with styling, scripts, and templates&#10;&#10;This commit introduces the foundational structure for the project, including static assets like CSS, JavaScript, and SVGs, along with Django views and templates. It establishes the base layout, homepage, and core sections for streamlined media services." />
     <MESSAGE value="Initialize Django apps and project structure&#10;&#10;Added initial `__init__.py`, `apps.py`, and other setup files for `ad_spend`, `music_beta`, and `tfn_ctv` apps. Included ASGI configuration for `tfn_ctv` and IntelliJ database source configuration." />
     <MESSAGE value="Add models, migrations, forms, and templates for core features&#10;&#10;This commit introduces models for `ServiceRequest`, `User`, and updates existing models to support file uploads (e.g., artist images, album covers, audio files). It also adds forms for service requests, user signup, and ad campaign creation. New templates for service requests and enhanced JavaScript functionality (e.g., form validation, search, and music player) are included." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add models, migrations, forms, and templates for core features&#10;&#10;This commit introduces models for `ServiceRequest`, `User`, and updates existing models to support file uploads (e.g., artist images, album covers, audio files). It also adds forms for service requests, user signup, and ad campaign creation. New templates for service requests and enhanced JavaScript functionality (e.g., form validation, search, and music player) are included." />
+    <MESSAGE value="Add migrations for music app models and refine file fields&#10;&#10;Initial migrations introduce models for Artist, Genre, Album, Track, User, ServiceRequest, and AdCampaign. Subsequent updates include replacing URL fields with file fields for media uploads, adding new fields (e.g., YouTube URL, track metadata, user agreements), and refining model functionalities." />
+    <MESSAGE value="Add initial blog app structure&#10;&#10;Set up the foundational structure for the blog app with Django. Included are essential files: models, admin, views, tests, migrations, and app configuration." />
+    <MESSAGE value="Add blog app with models, migration, and admin integration&#10;&#10;This commit introduces the initial structure for the blog app in Django. It includes a `Post` model, its corresponding migration, admin registration, and necessary configuration updates to settings. The app sets up the foundation for managing blog posts in the project." />
+    <MESSAGE value="updated git ignore" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated git ignore" />
   </component>
 </project>

@@ -19,3 +19,21 @@
 - dark mode
 
 - shuffle functionality
+
+- login/ logout (auth)
+
+- signup
+- password hashing
+- user authentication
+- user authorization
+- user sessions
+- flash message / toast
+- jQuery / AJAX
+- web scraping for data
+- email
+- templates
+- static
+    - images
+    - css
+    - javascript
+-

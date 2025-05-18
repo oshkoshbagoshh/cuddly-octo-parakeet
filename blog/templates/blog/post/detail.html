@@ -1,0 +1,18 @@
+<!-- detail.html -->
+{% extends "base.html" %}
+
+{% block title %}
+{{ post.title }}
+{% endblock %}
+
+{% block content %}
+<article class="post-detail">
+    <h1>{{ post.title }}</h1>
+    <p class="post-meta">
+        Published on {{ post.publish|date:"F d, Y" }} by {{ post.author }}
+    </p>
+    <div class="post-content">
+        {{ post.body|linebreaks }}
+    </div>
+</article>
+{% endblock %}

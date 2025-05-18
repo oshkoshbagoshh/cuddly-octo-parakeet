@@ -1,0 +1,140 @@
+/* Global Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+}
+
+/* Section Spacing */
+section {
+    padding: 60px 0;
+}
+
+/* Hero Section */
+#hero {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Services Section */
+.card {
+    transition: transform 0.3s ease;
+    border: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* Testimonials Section */
+#testimonials {
+    background-color: #f8f9fa;
+}
+
+/* About Us Section */
+#about .card {
+    height: 100%;
+}
+
+/* FAQ Section */
+#faq {
+    background-color: #f8f9fa;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: #e7f1ff;
+    color: #0d6efd;
+}
+
+/* Contact Section */
+#contact form {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    border-radius: 5px;
+}
+
+/* Blog Section */
+#blog {
+    background-color: #f8f9fa;
+}
+
+#blog .card {
+    height: 100%;
+}
+
+/* Music Platform Styles */
+#music-player .card {
+    margin-bottom: 20px;
+}
+
+.music-player-card {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.album-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.album-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.track-row {
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.track-row:hover {
+    background-color: #f8f9fa;
+}
+
+.play-btn {
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.play-btn i {
+    font-size: 1.2rem;
+}
+
+audio {
+    width: 100%;
+    border-radius: 30px;
+}
+
+audio::-webkit-media-controls-panel {
+    background-color: #f8f9fa;
+}
+
+audio::-webkit-media-controls-play-button {
+    background-color: #007bff;
+    border-radius: 50%;
+}
+
+/* Footer */
+footer {
+    background-color: #343a40;
+    color: white;
+    padding: 30px 0;
+}
+
+footer a {
+    color: white;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: #f8f9fa;
+    text-decoration: underline;
+}
