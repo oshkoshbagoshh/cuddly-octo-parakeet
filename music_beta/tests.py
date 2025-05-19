@@ -182,3 +182,9 @@ class AdCampaignModelTest(TestCase):
     def test_ad_campaign_string_representation(self):
         """Test the string representation of an ad campaign."""
         self.assertEqual(str(self.ad_campaign), "Test Campaign")
+
+
+# TODO: add tests for audio player, uploading images, tracks, videos, etc for music library
+# TODO: add tests to check for deadlinks, misc pages, etc.
+# TODO: test for media library filenames
+

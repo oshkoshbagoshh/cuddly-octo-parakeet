@@ -178,3 +178,11 @@ class TrackForm(forms.ModelForm):
             instance.save()
 
         return instance
+
+# copyright form
+class CopyrightForm(forms.Form):
+    holder = forms.CharField(max_length=255, label="Copyright Holder")
+    license_type = forms.CharField(max_length=255, required=False, label="License Type")
+    year = forms.IntegerField(required=False, label="Year")
+    additional_notes = forms.CharField(widget=forms.Textarea, required=False, label="Additional Notes")
+    email = forms.EmailField(label="Your Email")

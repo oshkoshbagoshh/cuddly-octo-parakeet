@@ -152,6 +152,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # For development
 DEFAULT_FROM_EMAIL = 'noreply@tfnms.co'
 DEVELOPER_EMAIL = 'developer@tfnms.co'  # Development email for form submissions
+# TODO
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_USE_TLS = True
+# EMAIL_PORT = 587
+# EMAIL_HOST_USER = 'your-email@gmail.com'           # Replace with your sender email
+# EMAIL_HOST_PASSWORD = 'your-email-app-password'    # Use app password or environment variable
+# DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 
 STORAGES = {

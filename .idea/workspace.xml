@@ -4,27 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="13be34ff-8b15-4b10-9803-6b03f1fd25b4" name="Changes" comment="Move model tests into main test module&#10;&#10;Consolidated all model tests into the primary `tests.py` file under `music_beta`. This change removes individual test files and simplifies the test structure, ensuring better organization and maintainability.">
-      <change afterPath="$PROJECT_DIR$/docs/audio_player.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/site_branding.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/wireframe.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/ads/film_scoring_template_placeholder.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/tracks/ID 117 v1.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/ChatGPT-Image-Apr-30-2025-01_43_51-PM-300x300.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/LinkedIn-Photo-100x100.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/LinkedIn-Photo.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/One-sheet Banner (Website).svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/One-sheet Banner with Logo (1).png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/TFN LinkedIn Banner (1920 x 1080 px).svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/TFN Site Picture_TV 2 (1).png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/TFN-LinkedIn-Banner-1920-x-1080-px-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/photo-1551434678-e076c223a692 (2).jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/photo-1611162617213-7d7a39e9b1d7 (2).jpeg" afterDir="false" />
+    <list default="true" id="13be34ff-8b15-4b10-9803-6b03f1fd25b4" name="Changes" comment="Add new One-sheet Banner SVG for website&#10;&#10;This commit introduces a new SVG file named 'One-sheet Banner (Website).svg' to the static images folder. It will be used as a banner image on the website.">
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/f323fb80-1315-44dd-82ba-78edc0a116db.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/f323fb80-1315-44dd-82ba-78edc0a116db.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/TODO.txt" beforeDir="false" afterPath="$PROJECT_DIR$/docs/TODO.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/music_beta/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/music_beta/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/music_beta/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/music_beta/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/music_beta/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/music_beta/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/music_beta/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/music_beta/tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/music_beta/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/music_beta/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/music_beta/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/music_beta/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,10 +46,10 @@
     &quot;accountId&quot;: &quot;f08c3f6e-c0cb-4226-befc-afc319c9ef13&quot;
   }
 }</component>
-  <component name="KubernetesApiPersistence"><![CDATA[{}]]></component>
-  <component name="KubernetesApiProvider"><![CDATA[{
-  "isMigrated": true
-}]]></component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
 }</component>
@@ -81,7 +68,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.pycharm.django.structure.promotion.once.per.project": "true",
     "django.template.preview.state": "SHOW_EDITOR_AND_PREVIEW",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "dev/refactor",
     "junie.onboarding.icon.badge.shown": "true",
     "last_opened_file_path": "/Users/aj/PycharmProjects/tfn_ctv/media/tracks",
     "list.type.of.created.stylesheet": "CSS",
@@ -163,7 +150,8 @@
       <workItem from="1747536983759" duration="19842000" />
       <workItem from="1747577452062" duration="6512000" />
       <workItem from="1747593764384" duration="3348000" />
-      <workItem from="1747614280809" duration="3713000" />
+      <workItem from="1747614280809" duration="4478000" />
+      <workItem from="1747639305616" duration="5429000" />
     </task>
     <task id="LOCAL-00001" summary="Add initial structure with styling, scripts, and templates&#10;&#10;This commit introduces the foundational structure for the project, including static assets like CSS, JavaScript, and SVGs, along with Django views and templates. It establishes the base layout, homepage, and core sections for streamlined media services.">
       <option name="closed" value="true" />
@@ -261,7 +249,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747578403878</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Add new One-sheet Banner SVG for website&#10;&#10;This commit introduces a new SVG file named 'One-sheet Banner (Website).svg' to the static images folder. It will be used as a banner image on the website.">
+      <option name="closed" value="true" />
+      <created>1747625265820</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1747625265820</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -289,6 +285,7 @@
     <MESSAGE value="misc" />
     <MESSAGE value="Remove blog app and associated assets.&#10;&#10;Deleted the &quot;blog&quot; app along with its models, templates, static assets, and frontend scripts. This removes all related functionality, migrations, and configuration tied to the blog." />
     <MESSAGE value="Move model tests into main test module&#10;&#10;Consolidated all model tests into the primary `tests.py` file under `music_beta`. This change removes individual test files and simplifies the test structure, ensuring better organization and maintainability." />
-    <option name="LAST_COMMIT_MESSAGE" value="Move model tests into main test module&#10;&#10;Consolidated all model tests into the primary `tests.py` file under `music_beta`. This change removes individual test files and simplifies the test structure, ensuring better organization and maintainability." />
+    <MESSAGE value="Add new One-sheet Banner SVG for website&#10;&#10;This commit introduces a new SVG file named 'One-sheet Banner (Website).svg' to the static images folder. It will be used as a banner image on the website." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add new One-sheet Banner SVG for website&#10;&#10;This commit introduces a new SVG file named 'One-sheet Banner (Website).svg' to the static images folder. It will be used as a banner image on the website." />
   </component>
 </project>

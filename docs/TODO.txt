@@ -75,4 +75,5 @@
 
 
 - handle image / media renaming
--
+- rewrite test, seed data / faker with new models
+- rewrite doc strings, comments, etc.

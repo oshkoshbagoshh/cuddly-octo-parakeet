@@ -1,9 +1,14 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse, FileResponse, Http404
 from django.views.decorators.csrf import csrf_exempt
-from django.core.mail import send_mail
+from django.core.mail import send_mail, EmailMessage
 from django.conf import settings
 from django.utils import timezone
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import letter
+from .forms import CopyrightForm
+from io import BytesIO
+
 import json
 import os
 
@@ -385,3 +390,112 @@ def update_play_count(request, track_id):
             return JsonResponse({'success': False, 'message': str(e)})
 
     return JsonResponse({'success': False, 'message': 'Invalid request method'})
+
+# copyright pdf gen
+def generate_copyright_pdf(request):
+    # Example: Accept form data via GET or POST, here static for demo
+    holder = "Your Company Name"
+    license_type = "All Rights Reserved"
+    year = "2024"
+
+    buffer = BytesIO()
+    p = canvas.Canvas(buffer)
+
+    p.setFont("Helvetica-Bold", 16)
+    p.drawString(100, 800, "Copyright and License Agreement")
+
+    p.setFont("Helvetica", 12)
+    p.drawString(100, 760, f"Copyright Holder: {holder}")
+    p.drawString(100, 740, f"License Type: {license_type}")
+    p.drawString(100, 720, f"Year: {year}")
+
+    p.drawString(100, 680, "Terms and Conditions:")
+    p.setFont("Helvetica", 10)
+    text = p.beginText(100, 660)
+    text.textLines("""
+This document certifies that the copyright holder owns the rights to the work.
+Any use beyond the scope of this license requires written permission.
+Please read the full terms on our website or contact legal@yourcompany.com.
+    """)
+    p.drawText(text)
+
+    p.showPage()
+    p.save()
+    buffer.seek(0)
+
+    response = HttpResponse(buffer, content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="copyright_boilerplate.pdf"'
+    return response
+
+# end copyright pdf gen
+
+# download copyright boilerplate
+def download_copyright_boilerplate(request):
+    filepath = os.path.join(settings.MEDIA_ROOT, 'copyright_docs', 'copyright_boilerplate.pdf')
+    if not os.path.exists(filepath):
+        raise Http404("Boilerplate document not found.")
+
+    return FileResponse(open(filepath, 'rb'), as_attachment=True, filename='copyright_boilerplate.pdf')
+
+
+def generate_pdf_bytes(holder, license_type, year, additional_notes):
+    buffer = BytesIO()
+
+    c = canvas.Canvas(buffer, pagesize=letter)
+    width, height = letter
+
+    c.setFont("Helvetica-Bold", 18)
+    c.drawCentredString(width / 2, height - 100, "Copyright and License Agreement")
+
+    c.setFont("Helvetica", 12)
+    lines = [
+        f"Copyright Holder: {holder}",
+        f"License Type: {license_type or 'N/A'}",
+        f"Year: {year or 'N/A'}",
+        "",
+        "Terms and Conditions:",
+        "This document certifies the copyright holder owns all rights to this work.",
+        "Any use beyond the scope of this license requires written permission.",
+        "Please contact legal@tfnms.co with questions or to request authorization.",
+        "",
+        "Additional Notes:",
+        additional_notes or "None",
+    ]
+
+    y = height - 150
+    for line in lines:
+        c.drawString(72, y, line)
+        y -= 18
+
+    c.save()
+    buffer.seek(0)
+    return buffer
+
+
+def copyright_request_view(request):
+    if request.method == 'POST':
+        form = CopyrightForm(request.POST)
+        if form.is_valid():
+            holder = form.cleaned_data['holder']
+            license_type = form.cleaned_data.get('license_type', '')
+            year = form.cleaned_data.get('year', '')
+            additional_notes = form.cleaned_data.get('additional_notes', '')
+            sender_email = form.cleaned_data['email']
+
+            pdf_file = generate_pdf_bytes(holder, license_type, year, additional_notes)
+
+            # Prepare email
+            email = EmailMessage(
+                subject="New Copyright Boilerplate Request",
+                body="Please find attached the copyright boilerplate generated from the form.",
+                from_email=sender_email,
+                to=["legal@tfnms.co"],
+            )
+            email.attach("copyright_boilerplate.pdf", pdf_file.read(), "application/pdf")
+            email.send()
+
+            return HttpResponse("Your request has been sent to legal@tfnms.co. Thank you.")
+    else:
+        form = CopyrightForm()
+
+    return render(request, "copyright_form.html", {"form": form})
