@@ -50,18 +50,52 @@ else:
 # Application definition
 
 INSTALLED_APPS = [
+    # Django CMS admin style
+    'djangocms_admin_style',
+
+    # Django core apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+
+    # Django CMS core apps
+    'cms',
+    'menus',
+    'treebeard',
+    'sekizai',
+
+    # Django CMS plugins
+    'djangocms_text_ckeditor',
+    'djangocms_link',
+    'djangocms_file',
+    'djangocms_picture',
+    'djangocms_video',
+    'djangocms_style',
+    'djangocms_audio',
+
+    # Project apps
     'music_beta.apps.MusicBetaConfig',
     'artist_portal.apps.ArtistPortalConfig',
     'whitenoise.runserver_nostatic',
     'bootstrap5',
     'rest_framework',
 ]
+
+# Django CMS settings
+SITE_ID = 1
+
+CMS_TEMPLATES = [
+    ('cms_home.html', 'Home Template'),
+    ('cms_page.html', 'Content Page'),
+    ('cms_sidebar.html', 'Page with Sidebar'),
+]
+
+CMS_PERMISSION = True
+CMS_PLACEHOLDER_CONF = {}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -73,6 +107,13 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'tfn_ctv.rate_limiting.RateLimitMiddleware',
+
+    # Django CMS middleware
+    'django.middleware.locale.LocaleMiddleware',
+    'cms.middleware.user.CurrentUserMiddleware',
+    'cms.middleware.page.CurrentPageMiddleware',
+    'cms.middleware.toolbar.ToolbarMiddleware',
+    'cms.middleware.language.LanguageCookieMiddleware',
 ]
 
 ROOT_URLCONF = 'tfn_ctv.urls'
@@ -80,14 +121,20 @@ ROOT_URLCONF = 'tfn_ctv.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
-        ,
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.media',
+                'django.template.context_processors.csrf',
+                'django.template.context_processors.static',
+                'sekizai.context_processors.sekizai',
+                'cms.context_processors.cms_settings',
             ],
         },
     },
@@ -168,13 +215,37 @@ if not DEBUG:
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en'
 
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
 USE_TZ = True
+
+# Django CMS language settings
+LANGUAGES = [
+    ('en', 'English'),
+]
+
+CMS_LANGUAGES = {
+    1: [
+        {
+            'code': 'en',
+            'name': 'English',
+            'fallbacks': ['en'],
+            'public': True,
+            'hide_untranslated': False,
+            'redirect_on_fallback': False,
+        },
+    ],
+    'default': {
+        'fallbacks': ['en'],
+        'redirect_on_fallback': True,
+        'public': True,
+        'hide_untranslated': False,
+    },
+}
 
 
 # Static files (CSS, JavaScript, Images)

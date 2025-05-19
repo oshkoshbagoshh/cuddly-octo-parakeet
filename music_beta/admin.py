@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Genre, Artist, Album, Track, ServiceRequest, User, AdCampaign, Copyright
+from .models import Genre, Artist, Album, Track, ServiceRequest, User, Copyright
 
 
 @admin.register(Genre)
@@ -45,14 +45,6 @@ class ServiceRequestAdmin(admin.ModelAdmin):
     date_hierarchy = 'created_at'
 
 
-@admin.register(AdCampaign)
-class AdCampaignAdmin(admin.ModelAdmin):
-    list_display = ('title', 'user', 'genre', 'mood', 'target_audience', 'created_at')
-    list_filter = ('genre', 'mood', 'target_audience', 'created_at')
-    search_fields = ('title', 'user__username', 'description')
-    readonly_fields = ('created_at',)
-    ordering = ('-created_at',)
-    date_hierarchy = 'created_at'
 
 
 @admin.register(User)

@@ -16,16 +16,21 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.contrib.auth.models import User
-from django.urls import path, include
+from django.urls import path, include, re_path
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework import routers, serializers, viewsets
+from django.conf.urls.i18n import i18n_patterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('music_beta.urls')),
-
+    path('music/', include('music_beta.urls')),
 ]
+
+# Add Django CMS URLs
+urlpatterns += i18n_patterns(
+    re_path(r'^', include('cms.urls')),
+)
 
 # Add static and media URL mappings in development
 if settings.DEBUG:

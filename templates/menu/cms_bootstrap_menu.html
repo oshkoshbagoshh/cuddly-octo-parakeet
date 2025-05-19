@@ -1,0 +1,24 @@
+{% load menu_tags %}
+
+{% for child in children %}
+<li class="nav-item {% if child.selected or child.ancestor %}active{% endif %} {% if child.children %}dropdown{% endif %}">
+    {% if child.children %}
+    <a class="nav-link dropdown-toggle" href="{{ child.attr.redirect_url|default:child.get_absolute_url }}" id="navbarDropdown{{ child.id }}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        {{ child.get_menu_title }}
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="navbarDropdown{{ child.id }}">
+        {% for grandchild in child.children %}
+        <li>
+            <a class="dropdown-item {% if grandchild.selected %}active{% endif %}" href="{{ grandchild.attr.redirect_url|default:grandchild.get_absolute_url }}">
+                {{ grandchild.get_menu_title }}
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <a class="nav-link {% if child.selected %}active{% endif %}" href="{{ child.attr.redirect_url|default:child.get_absolute_url }}">
+        {{ child.get_menu_title }}
+    </a>
+    {% endif %}
+</li>
+{% endfor %}

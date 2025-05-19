@@ -13,6 +13,22 @@ python-dotenv>=1.0.0
 # Mutagen for ID3 metadata extraction
 mutagen>=1.47.0
 
+# Django REST framework for API
 djangorestframework~=3.16.0
+
+# Librosa for audio analysis (BPM, key detection)
+librosa>=0.10.1
+
+# Django CMS for content management
+django-cms>=3.11.0
+djangocms-admin-style>=3.2.0
+djangocms-text-ckeditor>=5.1.1
+djangocms-link>=3.1.0
+djangocms-file>=3.0.0
+djangocms-picture>=4.0.0
+djangocms-video>=3.0.0
+djangocms-style>=3.0.0
+djangocms-audio
+
 dotenv~=0.9.9
 reportlab~=4.4.1
