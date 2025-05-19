@@ -100,3 +100,12 @@
         - user signup form / login & logout for artists (upload fields from model, etc. ) then create views and update REST API
         - use fallback artist_picture.svg if they can't / don't upload profile pic
 
+- [ ] get rid of stuff you don't need
+- [ ] update / refactor models
+- [ ] djangocms
+- [ ] pull mood from DEAM dataset
+- [ ] Song (get key, BPM)
+- [ ] copyright will always be ours
+- [ ] don't need to upload video or manage campaign, they just need to browse through music portal and search via tags, moods, emotions, etc
+- [ ] TODO: librosa
+

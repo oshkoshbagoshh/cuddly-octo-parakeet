@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Form validation for contact form
-    const contactForm = document.querySelector('#contact form');
+    const contactForm = document.querySelector('#contact-form');
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -141,7 +141,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             if (valid) {
-                // Store in local storage
+                // Prepare data for submission
                 const contactData = {
                     name: name.value,
                     email: email.value,
@@ -149,12 +149,33 @@ document.addEventListener('DOMContentLoaded', function() {
                     timestamp: new Date().toISOString()
                 };
 
-                // Get existing messages or initialize empty array
+                // Store in local storage (for demo purposes)
                 const existingMessages = JSON.parse(localStorage.getItem('contactMessages') || '[]');
                 existingMessages.push(contactData);
                 localStorage.setItem('contactMessages', JSON.stringify(existingMessages));
 
-                alert('Thank you for your message! We will get back to you soon.');
+                // Send data to server with CSRF protection
+                fetch('/contact/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': getCsrfToken()
+                    },
+                    body: JSON.stringify(contactData)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        showToast('Thank you for your message! We will get back to you soon.', 'success');
+                    } else {
+                        showToast('There was an error sending your message. Please try again.', 'danger');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    showToast('There was an error sending your message. Please try again.', 'danger');
+                });
+
                 contactForm.reset();
             }
         });

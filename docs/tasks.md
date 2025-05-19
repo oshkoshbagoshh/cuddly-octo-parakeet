@@ -4,13 +4,13 @@ This document contains a detailed list of actionable improvement tasks for the T
 
 ## Security Improvements
 
-1. [ ] Move SECRET_KEY to environment variables to prevent exposure in version control
-2. [ ] Configure DEBUG setting to be environment-dependent (False in production)
-3. [ ] Set up proper ALLOWED_HOSTS configuration for different environments
-4. [ ] Implement password policies for user authentication
-5. [ ] Add CSRF protection to the contact form submission
-6. [ ] Configure secure cookies and HTTPS settings
-7. [ ] Implement rate limiting for form submissions to prevent abuse
+1. [x] Move SECRET_KEY to environment variables to prevent exposure in version control
+2. [x] Configure DEBUG setting to be environment-dependent (False in production)
+3. [x] Set up proper ALLOWED_HOSTS configuration for different environments
+4. [x] Implement password policies for user authentication
+5. [x] Add CSRF protection to the contact form submission
+6. [x] Configure secure cookies and HTTPS settings
+7. [x] Implement rate limiting for form submissions to prevent abuse
 
 ## Database and Models
 

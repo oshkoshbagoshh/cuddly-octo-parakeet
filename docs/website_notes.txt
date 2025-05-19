@@ -19,15 +19,3 @@ Website Draft: https://www.canva.com/design/DAGMh0e3CW4/A6VWLL8WXph0rRRHWmC3bQ/e
 
 
 
-
-Ashkan’s Notes
-
-
-
-Planning a Web App: The Basics (Initial Site Needs as of August 2024):
-What is my app’s functionality? (examples: logging in/out, adding a spreadsheet, filling out a form, viewing a product wish list, viewing current products, etc.)
-Filling out a form to request services
-Name/Email/Company
-Drop Down for Media Solutions or Music Services
-App Functions (examples: handle file uploads, handle form submissions, connect form submissions to the database, data analysis, let users view and interact with products, let users download spreadsheets, handle authentication, etc.)
-Handle Form submissions to send to email (hello@tfnms.co)

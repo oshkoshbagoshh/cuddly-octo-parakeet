@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils import timezone
 from django.core.exceptions import ValidationError
+from django.contrib.auth.models import AbstractUser
+from django.conf import settings
 import os
 import uuid
 
@@ -208,6 +210,9 @@ class Track(models.Model):
         track_number (str): Track number from ID3 metadata.
         bitrate (int): Bitrate of audio in kbps.
         sample_rate (int): Sample rate of audio in Hz.
+        # TODO: BPM
+        # TODO: key
+
     """
     title = models.CharField(max_length=200, help_text='Enter the track title')
     album = models.ForeignKey(Album, on_delete=models.CASCADE, related_name='tracks')
@@ -232,48 +237,51 @@ class Track(models.Model):
         return self.title
 
 
-class User(models.Model):
+class User(AbstractUser):
     """
-    Represents an application user.
+    Custom User model that extends Django's AbstractUser.
 
-    Fields:
+    This model inherits all the authentication functionality from Django's built-in User model
+    while adding custom fields for our application.
+
+    Fields (inherited from AbstractUser):
         username (str): Unique username of the user.
-        email (str): Unique email address.
-        password (str): User password (note: plaintext here for simplicity; should be hashed in production).
+        email (str): Email address.
+        password (str): Hashed user password.
+        first_name (str): User's first name.
+        last_name (str): User's last name.
+        is_active (bool): Whether the user account is active.
+        is_staff (bool): Whether the user can access the admin site.
+        is_superuser (bool): Whether the user has all permissions.
         date_joined (datetime): Timestamp user registered.
+        last_login (datetime): Timestamp of the user's last login.
+
+    Additional Fields:
         agreed_to_terms (bool): Whether user agreed to terms and conditions.
         agreed_to_privacy (bool): Whether user agreed to privacy policy.
         receive_marketing (bool): Whether user opted to receive marketing emails.
         agreement_date (datetime): Timestamp when user agreed to terms/privacy policies.
         user_type (str): Type of user - 'client' or 'artist'.
-        is_active (bool): Whether the user account is active.
-        last_login (datetime): Timestamp of the user's last login.
     """
     USER_TYPE_CHOICES = [
         ('client', 'Client'),
         ('artist', 'Artist'),
     ]
 
-    username = models.CharField(max_length=100, unique=True)
+    # Make email required and unique
     email = models.EmailField(unique=True)
-    password = models.CharField(max_length=100)  # Warning: Use hashed passwords in production!
-    date_joined = models.DateTimeField(default=timezone.now)
 
+    # Custom fields
     agreed_to_terms = models.BooleanField(default=False, help_text='User has agreed to Terms and Conditions')
     agreed_to_privacy = models.BooleanField(default=False, help_text='User has agreed to Privacy Policy')
     receive_marketing = models.BooleanField(default=False, help_text='User has opted in to marketing emails')
     agreement_date = models.DateTimeField(null=True, blank=True, help_text='When the user agreed to terms')
-
     user_type = models.CharField(max_length=10, choices=USER_TYPE_CHOICES, default='client', 
                                 help_text='Type of user - client or artist')
-    is_active = models.BooleanField(default=True, help_text='Whether the user account is active')
-    last_login = models.DateTimeField(null=True, blank=True, help_text='When the user last logged in')
-
-    def __str__(self):
-        return self.username
 
 
 class AdCampaign(models.Model):
+    # TODO: edit the AdCampaign model and remove video, target audience, etc.
     """
     Represents an advertisement campaign with related media and metadata.
 
@@ -312,7 +320,7 @@ class AdCampaign(models.Model):
     genre = models.ForeignKey(Genre, on_delete=models.SET_NULL, null=True)
     mood = models.CharField(max_length=20, choices=MOOD_CHOICES)
     target_audience = models.CharField(max_length=20, choices=TARGET_AUDIENCE_CHOICES)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='ad_campaigns')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='ad_campaigns')
     created_at = models.DateTimeField(default=timezone.now)
 
     def clean(self):

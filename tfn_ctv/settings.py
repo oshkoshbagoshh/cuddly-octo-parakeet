@@ -14,16 +14,13 @@ from pathlib import Path
 import os
 
 import dotenv
+from dotenv import load_dotenv
 
-
-
-# Environment variables can be loaded from .env file
-# If python-dotenv is installed, uncomment the following lines:
-# try:
-#     from dotenv import load_dotenv
-#     load_dotenv()
-# except ImportError:
-#     pass
+# Load environment variables from .env file
+try:
+    load_dotenv()
+except ImportError:
+    pass
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -34,12 +31,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-yu!84b5rz0^s6uz96@0tq^r)7eoz#o&&@)u+dnzqti0%24$+_g'
+# Get SECRET_KEY from environment variable or use default for development
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-yu!84b5rz0^s6uz96@0tq^r)7eoz#o&&@)u+dnzqti0%24$+_g')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# Get DEBUG from environment variable (default to True for development)
+DEBUG = os.environ.get('DJANGO_DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = []
+# Set ALLOWED_HOSTS based on environment
+# In production, this should be a comma-separated list of domains
+# For development, we allow localhost and 127.0.0.1
+if DEBUG:
+    ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+else:
+    ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', '').split(',')
 
 
 # Application definition
@@ -67,6 +72,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'tfn_ctv.rate_limiting.RateLimitMiddleware',
 ]
 
 ROOT_URLCONF = 'tfn_ctv.urls'
@@ -107,9 +113,16 @@ DATABASES = {
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'OPTIONS': {
+            'user_attributes': ['username', 'email', 'first_name', 'last_name'],
+            'max_similarity': 0.7,
+        }
     },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'OPTIONS': {
+            'min_length': 10,
+        }
     },
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
@@ -117,7 +130,39 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
+    {
+        'NAME': 'tfn_ctv.password_validation.ComplexityValidator',
+        'OPTIONS': {
+            'min_upper': 1,
+            'min_lower': 1,
+            'min_digits': 1,
+            'min_special': 1,
+        }
+    },
 ]
+
+# Password policy settings
+PASSWORD_RESET_TIMEOUT = 86400  # 24 hours in seconds
+PASSWORD_EXPIRY_DAYS = 90  # Password expires after 90 days
+PASSWORD_HISTORY_COUNT = 5  # Remember last 5 passwords to prevent reuse
+
+# Security settings for cookies and HTTPS
+# These settings are only applied when DEBUG is False (production)
+if not DEBUG:
+    # Secure cookie settings
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SESSION_COOKIE_HTTPONLY = True
+    CSRF_COOKIE_HTTPONLY = True
+    SESSION_COOKIE_SAMESITE = 'Lax'
+    CSRF_COOKIE_SAMESITE = 'Lax'
+
+    # HTTPS settings
+    SECURE_SSL_REDIRECT = True
+    SECURE_HSTS_SECONDS = 31536000  # 1 year
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
 # Internationalization
@@ -149,6 +194,9 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Custom User model
+AUTH_USER_MODEL = 'music_beta.User'
 
 # Email settings
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # For development

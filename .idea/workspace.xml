@@ -4,10 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="13be34ff-8b15-4b10-9803-6b03f1fd25b4" name="Changes" comment="Add new One-sheet Banner SVG for website&#10;&#10;This commit introduces a new SVG file named 'One-sheet Banner (Website).svg' to the static images folder. It will be used as a banner image on the website.">
+    <list default="true" id="13be34ff-8b15-4b10-9803-6b03f1fd25b4" name="Changes" comment="Add artist profiles and public profiles with related forms&#10;&#10;Introduced artist and public profile pages, supporting profile editing, social links, and track management. Updated models, serializers, and forms to handle user types and enhanced track/audio functionality. Added routing and templates for streamlined user experience.">
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/f323fb80-1315-44dd-82ba-78edc0a116db.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/f323fb80-1315-44dd-82ba-78edc0a116db.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad_spend/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad_spend/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad_spend/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad_spend/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad_spend/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad_spend/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad_spend/views.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/TODO.txt" beforeDir="false" afterPath="$PROJECT_DIR$/docs/TODO.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/website_notes.txt" beforeDir="false" afterPath="$PROJECT_DIR$/docs/website_notes.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/music_beta/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/music_beta/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -153,6 +162,7 @@
       <workItem from="1747593764384" duration="3348000" />
       <workItem from="1747614280809" duration="4478000" />
       <workItem from="1747639305616" duration="5429000" />
+      <workItem from="1747681660913" duration="2980000" />
     </task>
     <task id="LOCAL-00001" summary="Add initial structure with styling, scripts, and templates&#10;&#10;This commit introduces the foundational structure for the project, including static assets like CSS, JavaScript, and SVGs, along with Django views and templates. It establishes the base layout, homepage, and core sections for streamlined media services.">
       <option name="closed" value="true" />
@@ -258,7 +268,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747625265820</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Add artist profiles and public profiles with related forms&#10;&#10;Introduced artist and public profile pages, supporting profile editing, social links, and track management. Updated models, serializers, and forms to handle user types and enhanced track/audio functionality. Added routing and templates for streamlined user experience.">
+      <option name="closed" value="true" />
+      <created>1747672035641</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1747672035641</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -287,6 +305,9 @@
     <MESSAGE value="Remove blog app and associated assets.&#10;&#10;Deleted the &quot;blog&quot; app along with its models, templates, static assets, and frontend scripts. This removes all related functionality, migrations, and configuration tied to the blog." />
     <MESSAGE value="Move model tests into main test module&#10;&#10;Consolidated all model tests into the primary `tests.py` file under `music_beta`. This change removes individual test files and simplifies the test structure, ensuring better organization and maintainability." />
     <MESSAGE value="Add new One-sheet Banner SVG for website&#10;&#10;This commit introduces a new SVG file named 'One-sheet Banner (Website).svg' to the static images folder. It will be used as a banner image on the website." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add new One-sheet Banner SVG for website&#10;&#10;This commit introduces a new SVG file named 'One-sheet Banner (Website).svg' to the static images folder. It will be used as a banner image on the website." />
+    <MESSAGE value="Update ad campaign field and add copyright model&#10;&#10;Replaced `youtube_url` with `video_url` in the `AdCampaign` model for clarity and flexibility. Introduced a new `Copyright` model with relationships to albums and tracks, enabling better copyright management." />
+    <MESSAGE value="Add basic artist portal and integrate API with DRF&#10;&#10;This commit introduces a new `artist_portal` app with the initial setup, including migrations, models, views, and admin configurations. Furthermore, it integrates Django Rest Framework (DRF) in `music_beta` with serializers, viewsets, and routing for entities like genres, artists, albums, tracks, and more. Documentation, tests, and dependencies are also updated to support the API framework." />
+    <MESSAGE value="Add artist profiles and public profiles with related forms&#10;&#10;Introduced artist and public profile pages, supporting profile editing, social links, and track management. Updated models, serializers, and forms to handle user types and enhanced track/audio functionality. Added routing and templates for streamlined user experience." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add artist profiles and public profiles with related forms&#10;&#10;Introduced artist and public profile pages, supporting profile editing, social links, and track management. Updated models, serializers, and forms to handle user types and enhanced track/audio functionality. Added routing and templates for streamlined user experience." />
   </component>
 </project>
