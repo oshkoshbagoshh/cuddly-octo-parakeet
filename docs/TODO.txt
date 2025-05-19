@@ -36,4 +36,6 @@
     - images
     - css
     - javascript
+    - bootstrap5
+    - jQuery
 -

@@ -4,12 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="13be34ff-8b15-4b10-9803-6b03f1fd25b4" name="Changes" comment="Remove blog app and associated assets.&#10;&#10;Deleted the &quot;blog&quot; app along with its models, templates, static assets, and frontend scripts. This removes all related functionality, migrations, and configuration tied to the blog.">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/f323fb80-1315-44dd-82ba-78edc0a116db.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/f323fb80-1315-44dd-82ba-78edc0a116db.xml" afterDir="false" />
+    <list default="true" id="13be34ff-8b15-4b10-9803-6b03f1fd25b4" name="Changes" comment="Move model tests into main test module&#10;&#10;Consolidated all model tests into the primary `tests.py` file under `music_beta`. This change removes individual test files and simplifies the test structure, ensuring better organization and maintainability.">
+      <change afterPath="$PROJECT_DIR$/static/css/global.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/master.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/music_beta/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/music_beta/tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/music_beta/tests/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/music_beta/tests/test_models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/TODO.txt" beforeDir="false" afterPath="$PROJECT_DIR$/docs/TODO.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tfn_ctv/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/tfn_ctv/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,9 +23,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Task" />
+        <option value="Python Script" />
         <option value="CSS File" />
         <option value="HTML File" />
-        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -44,6 +44,10 @@
     &quot;accountId&quot;: &quot;f08c3f6e-c0cb-4226-befc-afc319c9ef13&quot;
   }
 }</component>
+  <component name="KubernetesApiPersistence"><![CDATA[{}]]></component>
+  <component name="KubernetesApiProvider"><![CDATA[{
+  "isMigrated": true
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
 }</component>
@@ -55,6 +59,7 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;Django Server.tfn_ctv.executor&quot;: &quot;Run&quot;,
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.OpenDjangoStructureViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
@@ -99,6 +104,7 @@
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="DJANGO_SETTINGS_MODULE" value="tfn_ctv.settings" />
       </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="" />
@@ -137,7 +143,9 @@
       <workItem from="1747536119906" duration="308000" />
       <workItem from="1747536456126" duration="485000" />
       <workItem from="1747536983759" duration="19842000" />
-      <workItem from="1747577452062" duration="560000" />
+      <workItem from="1747577452062" duration="6512000" />
+      <workItem from="1747593764384" duration="3348000" />
+      <workItem from="1747614280809" duration="261000" />
     </task>
     <task id="LOCAL-00001" summary="Add initial structure with styling, scripts, and templates&#10;&#10;This commit introduces the foundational structure for the project, including static assets like CSS, JavaScript, and SVGs, along with Django views and templates. It establishes the base layout, homepage, and core sections for streamlined media services.">
       <option name="closed" value="true" />
@@ -227,7 +235,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747564627893</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Move model tests into main test module&#10;&#10;Consolidated all model tests into the primary `tests.py` file under `music_beta`. This change removes individual test files and simplifies the test structure, ensuring better organization and maintainability.">
+      <option name="closed" value="true" />
+      <created>1747578403878</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1747578403878</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -254,6 +270,7 @@
     <MESSAGE value="updated git ignore" />
     <MESSAGE value="misc" />
     <MESSAGE value="Remove blog app and associated assets.&#10;&#10;Deleted the &quot;blog&quot; app along with its models, templates, static assets, and frontend scripts. This removes all related functionality, migrations, and configuration tied to the blog." />
-    <option name="LAST_COMMIT_MESSAGE" value="Remove blog app and associated assets.&#10;&#10;Deleted the &quot;blog&quot; app along with its models, templates, static assets, and frontend scripts. This removes all related functionality, migrations, and configuration tied to the blog." />
+    <MESSAGE value="Move model tests into main test module&#10;&#10;Consolidated all model tests into the primary `tests.py` file under `music_beta`. This change removes individual test files and simplifies the test structure, ensuring better organization and maintainability." />
+    <option name="LAST_COMMIT_MESSAGE" value="Move model tests into main test module&#10;&#10;Consolidated all model tests into the primary `tests.py` file under `music_beta`. This change removes individual test files and simplifies the test structure, ensuring better organization and maintainability." />
   </component>
 </project>
