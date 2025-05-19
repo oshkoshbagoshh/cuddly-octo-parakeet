@@ -59,7 +59,8 @@ class AdCampaignForm(forms.Form):
     title = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Campaign Title'}))
     description = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Campaign Description', 'rows': 3}))
     video = forms.FileField(widget=forms.FileInput(attrs={'class': 'form-control', 'accept': 'video/*'}), required=False)
-    youtube_url = forms.URLField(required=False, widget=forms.URLInput(attrs={'class': 'form-control', 'placeholder': 'YouTube URL (preferred)'}))
+    # youtube_url = forms.URLField(required=False, widget=forms.URLInput(attrs={'class': 'form-control', 'placeholder': 'YouTube URL (preferred)'}))
+    video_url = forms.URLField(required=False, widget=forms.URLInput(attrs={'class': 'form-control', 'placeholder': 'Video URL (preferred)'}))
     genre = forms.ModelChoiceField(queryset=Genre.objects.all(), widget=forms.Select(attrs={'class': 'form-control'}))
     mood = forms.ChoiceField(choices=[
         ('', 'Select Mood'),

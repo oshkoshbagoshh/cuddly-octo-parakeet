@@ -5,11 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="13be34ff-8b15-4b10-9803-6b03f1fd25b4" name="Changes" comment="Move model tests into main test module&#10;&#10;Consolidated all model tests into the primary `tests.py` file under `music_beta`. This change removes individual test files and simplifies the test structure, ensuring better organization and maintainability.">
-      <change afterPath="$PROJECT_DIR$/static/css/global.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/master.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/audio_player.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/site_branding.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/wireframe.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/ads/film_scoring_template_placeholder.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/tracks/ID 117 v1.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/ChatGPT-Image-Apr-30-2025-01_43_51-PM-300x300.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/LinkedIn-Photo-100x100.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/LinkedIn-Photo.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/One-sheet Banner (Website).svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/One-sheet Banner with Logo (1).png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/TFN LinkedIn Banner (1920 x 1080 px).svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/TFN Site Picture_TV 2 (1).png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/TFN-LinkedIn-Banner-1920-x-1080-px-2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/photo-1551434678-e076c223a692 (2).jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/photo-1611162617213-7d7a39e9b1d7 (2).jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/f323fb80-1315-44dd-82ba-78edc0a116db.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/f323fb80-1315-44dd-82ba-78edc0a116db.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/TODO.txt" beforeDir="false" afterPath="$PROJECT_DIR$/docs/TODO.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tfn_ctv/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/tfn_ctv/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/music_beta/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/music_beta/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/music_beta/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/music_beta/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,39 +71,42 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;Django Server.tfn_ctv.executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenDjangoStructureViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.pycharm.django.structure.promotion.once.per.project&quot;: &quot;true&quot;,
-    &quot;django.template.preview.state&quot;: &quot;SHOW_EDITOR_AND_PREVIEW&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/aj/PycharmProjects/tfn_ctv/blog&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "Django Server.tfn_ctv.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.pycharm.django.structure.promotion.once.per.project": "true",
+    "django.template.preview.state": "SHOW_EDITOR_AND_PREVIEW",
+    "git-widget-placeholder": "main",
+    "junie.onboarding.icon.badge.shown": "true",
+    "last_opened_file_path": "/Users/aj/PycharmProjects/tfn_ctv/media/tracks",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;sqlite&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "sqlite"
     ],
-    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
-      &quot;TEXT&quot;
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "TEXT"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/media/tracks" />
+      <recent name="$PROJECT_DIR$/media/ads" />
+      <recent name="$PROJECT_DIR$/static/images" />
       <recent name="$PROJECT_DIR$/blog" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -145,7 +163,7 @@
       <workItem from="1747536983759" duration="19842000" />
       <workItem from="1747577452062" duration="6512000" />
       <workItem from="1747593764384" duration="3348000" />
-      <workItem from="1747614280809" duration="261000" />
+      <workItem from="1747614280809" duration="3713000" />
     </task>
     <task id="LOCAL-00001" summary="Add initial structure with styling, scripts, and templates&#10;&#10;This commit introduces the foundational structure for the project, including static assets like CSS, JavaScript, and SVGs, along with Django views and templates. It establishes the base layout, homepage, and core sections for streamlined media services.">
       <option name="closed" value="true" />

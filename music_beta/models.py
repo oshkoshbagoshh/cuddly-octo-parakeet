@@ -61,6 +61,7 @@ class ServiceRequest(models.Model):
 class Genre(models.Model):
     """Model representing a music genre."""
     name = models.CharField(max_length=200, help_text='Enter a music genre (e.g. Rock, Jazz, Hip Hop)')
+    objects = None # TODO: update migration with Laravel version, refactor objects
 
     def __str__(self):
         """String for representing the Model object."""
@@ -78,11 +79,13 @@ class Artist(models.Model):
         if self.image and hasattr(self.image, 'url'):
             try:
                 # Try to access the URL to check if the file exists
-                self.image.url
+                self.image.url()
                 return self.image.url
             except:
                 # If there's an error accessing the URL, use the fallback
+                # add fallback images (artist picture)
                 pass
+
         # Fallback to a default image from picsum.photos
         return f'https://picsum.photos/300?random={self.id}'
 
@@ -104,10 +107,11 @@ class Album(models.Model):
         if self.cover_image and hasattr(self.cover_image, 'url'):
             try:
                 # Try to access the URL to check if the file exists
-                self.cover_image.url
+                self.cover_image.url()
                 return self.cover_image.url
             except:
                 # If there's an error accessing the URL, use the fallback
+                # TODO: upload fallback images for album covers
                 pass
         # Fallback to a default image from picsum.photos
         return f'https://picsum.photos/300?random={self.id}'

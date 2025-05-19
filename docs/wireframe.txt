@@ -1,0 +1,54 @@
+# Wirerame
+- this is what the final Home.vue should look like with all of these different sections
+
+------------------------------------------------
+|                     HEADER                     |
+|  [Logo]  [Home]  [Services]  [Testimonials]   |
+|  [About Us]  [FAQ]  [Contact]  [Blog]         |
+-------------------------------------------------
+|                  HERO SECTION                  |
+|  [Welcome Message]                             |
+|  [Call to Action Button]                       |
+|  [Background Image/SVG Graphic]               |
+----------------------------------------'---------
+|                 SERVICES SECTION               |
+|  [TFN Media Services]                         |
+|  [Service Card 1: Music Production]           |
+|  [Service Card 2: Video Production]           |
+|  [Service Card 3: Photography]                |
+-------------------------------------------------
+|                TESTIMONIALS SECTION            |
+|  [What Our Clients Say]                        |
+|  [Carousel/Slideshow of Testimonials]          |
+-------------------------------------------------
+|                  ABOUT US SECTION              |
+|  [About Us]                                    |
+|  [Company Overview]                            |
+|  [Team Introduction]                           |
+|  [About Nathan]                               |
+-------------------------------------------------
+|                    FAQ SECTION                 |
+|  [Frequently Asked Questions]                  |
+|  [Question 1]                                  |
+|  [Question 2]                                  |
+|  [Question 3]                                  |
+-------------------------------------------------
+|                 CONTACT SECTION                 |
+|  [Contact Us]                                  |
+|  [Name Field]                                  |
+|  [Email Field]                                 |
+|  [Message Field]                               |
+|  [Submit Button]                               |
+|  [Calendly Embed]                              |
+-------------------------------------------------
+|                  BLOG SECTION                  |
+|  [Latest Posts]                                |
+|  [Post 1]                                      |
+|  [Post 2]                                      |
+|  [Post 3]                                      |
+-------------------------------------------------
+|                    FOOTER                      |
+|  [Copyright Notice]                            |
+|  [Privacy Policy Link]                         |
+|  [Social Media Links]                          |
+-------------------------------------------------

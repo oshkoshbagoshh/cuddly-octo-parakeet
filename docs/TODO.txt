@@ -38,4 +38,41 @@
     - javascript
     - bootstrap5
     - jQuery
+- have the moods from the form be from the actual dataset (DEAM, research, Kaggle, etc)
+
+
+================
+
+# TFNMS Main Site MVP Guidelines
+
+- Our team
+- each employee has a card, image, details (use start boostrap modern business)
+- Nathan's Linked Posts on CTV are scraped via PHP web scraper / browsershot / guzzle
+- all content for the pages and posts is entered
+- Admin Dashboard panel for managing blog posts , ( template created so can use same
+ - user is allowed to upload docx, markdown , RTF, and convert to blog post
+ - unit tests with PEST
+ - formatting / phpcs , etc.
+ - github action before pushing and merging into prod
+ - environment variables ,etc
+ - docker container created for development environment with PHP, Apache, MySQL, etc
+ - web development planning checklist (SEO, accessibility , etc )
+ - custom style and color schema / style guide, fonts, etc. are applied correctly in Tailwind
+
+ =======
+
+ ## TFNMS Music App MVP
+
+ - just another online store copy / laragigs for breakdown
+ - bear notes
+ - CTV categories, etc
+ - TFN Music Library / Samples version 1 created ( pull combines Itunes XML / audio scanner thing in typescript )
+ - Laravel PHPffmpeg
+ - get copyright free demo video files, songs, etc
+ - advertisers looking for copyright free songs can search by genre, tag, and if they aren't a member, they get a "Register to do XYZ"
+ - artists can upload their songs and see if there is a match via "mood, etc."
+ - id3 metadata is collected when songs uploaded
+
+
+- handle image / media renaming
 -
