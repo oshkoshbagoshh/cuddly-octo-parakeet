@@ -3,7 +3,7 @@ from django.core.validators import RegexValidator
 from django.core.files.storage import default_storage
 import os
 
-from .models import Genre, Track
+from .models import Genre, Track, ClientCampaign
 from .utils import extract_audio_metadata
 
 class ServiceRequestForm(forms.Form):
@@ -24,6 +24,17 @@ class UserSignupForm(forms.Form):
     email = forms.EmailField(required=True, widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email'}))
     password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password'}))
     confirm_password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Confirm Password'}))
+
+    # User type selection
+    user_type = forms.ChoiceField(
+        choices=[
+            ('client', 'I am a client looking for music for my ad campaign'),
+            ('artist', 'I am an artist looking to manage my artist profile')
+        ],
+        required=True,
+        widget=forms.RadioSelect(attrs={'class': 'form-check-input'}),
+        initial='client'
+    )
 
     # Terms and conditions agreement
     agree_terms = forms.BooleanField(
@@ -186,3 +197,33 @@ class CopyrightForm(forms.Form):
     year = forms.IntegerField(required=False, label="Year")
     additional_notes = forms.CharField(widget=forms.Textarea, required=False, label="Additional Notes")
     email = forms.EmailField(label="Your Email")
+
+class LoginForm(forms.Form):
+    """Form for user login."""
+    username = forms.CharField(max_length=100, required=True, 
+                              widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Username'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password'}))
+    remember_me = forms.BooleanField(required=False, 
+                                    widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+                                    label='Remember me')
+
+class ClientCampaignForm(forms.ModelForm):
+    """Form for client campaign management."""
+    class Meta:
+        model = ClientCampaign
+        fields = ['name', 'description', 'budget', 'start_date', 'end_date']
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Campaign Name'}),
+            'description': forms.Textarea(attrs={'class': 'form-control', 'rows': 3, 'placeholder': 'Campaign Description'}),
+            'budget': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Budget', 'min': '0', 'step': '0.01'}),
+            'start_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+            'end_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'})
+        }
+
+    def clean(self):
+        cleaned_data = super().clean()
+        start_date = cleaned_data.get('start_date')
+        end_date = cleaned_data.get('end_date')
+
+        if start_date and end_date and start_date > end_date:
+            raise forms.ValidationError("End date must be after start date.")

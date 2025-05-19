@@ -4,11 +4,12 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core.mail import send_mail, EmailMessage
 from django.conf import settings
 from django.utils import timezone
+from django.contrib import messages
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
-from .forms import CopyrightForm
+from .forms import CopyrightForm, LoginForm
 from io import BytesIO
-
+import hashlib
 import json
 import os
 
@@ -33,7 +34,7 @@ except ImportError:
     requests = MockRequests()
 
 from .models import Genre, Artist, Album, Track, User, AdCampaign, ServiceRequest
-from .forms import UserSignupForm, AdCampaignForm, ServiceRequestForm
+from .forms import UserSignupForm, AdCampaignForm, ServiceRequestForm, LoginForm
 
 # Create your views here.
 def home(request):
@@ -61,6 +62,7 @@ def signup(request):
             username = data.get('username')
             email = data.get('email')
             password = data.get('password')
+            user_type = data.get('user_type', 'client')  # Default to client if not specified
             agree_terms = data.get('agree_terms', False)
             receive_marketing = data.get('receive_marketing', False)
 
@@ -74,18 +76,33 @@ def signup(request):
             if not agree_terms:
                 return JsonResponse({'success': False, 'message': 'You must agree to the Terms and Conditions and Privacy Policy to sign up.'})
 
+            # Validate user_type
+            if user_type not in ['client', 'artist']:
+                return JsonResponse({'success': False, 'message': 'Invalid user type. Must be either "client" or "artist".'})
+
             # Create new user
             user = User.objects.create(
                 username=username,
                 email=email,
                 password=password,  # In a real app, this would be hashed
+                user_type=user_type,
                 agreed_to_terms=True,
                 agreed_to_privacy=True,
                 receive_marketing=receive_marketing,
                 agreement_date=timezone.now()
             )
 
-            return JsonResponse({'success': True, 'message': 'User created successfully'})
+            # Set up session
+            request.session['user_id'] = user.id
+            request.session['username'] = user.username
+            request.session['user_type'] = user.user_type
+
+            return JsonResponse({
+                'success': True, 
+                'message': 'User created successfully',
+                'user_id': user.id,
+                'user_type': user.user_type
+            })
         except Exception as e:
             return JsonResponse({'success': False, 'message': str(e)})
 
@@ -499,3 +516,289 @@ def copyright_request_view(request):
         form = CopyrightForm()
 
     return render(request, "copyright_form.html", {"form": form})
+
+def login_view(request):
+    """
+    View function for user login.
+    """
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            remember_me = form.cleaned_data.get('remember_me', False)
+
+            try:
+                user = User.objects.get(username=username)
+
+                # In a real app, use a secure password hashing method
+                # For now, we're just comparing plaintext passwords
+                if user.password == password:
+                    # Set session data
+                    request.session['user_id'] = user.id
+                    request.session['username'] = user.username
+                    request.session['user_type'] = user.user_type
+
+                    # Update last login time
+                    user.last_login = timezone.now()
+                    user.save()
+
+                    # Set session expiry if remember_me is checked
+                    if remember_me:
+                        # Session will expire in 2 weeks
+                        request.session.set_expiry(1209600)
+                    else:
+                        # Session will expire when browser is closed
+                        request.session.set_expiry(0)
+
+                    messages.success(request, f'Welcome back, {username}!')
+
+                    # Redirect based on user type
+                    if user.user_type == 'artist':
+                        return redirect('artist_profile')
+                    else:  # client
+                        return redirect('client_dashboard')
+                else:
+                    messages.error(request, 'Invalid password.')
+            except User.DoesNotExist:
+                messages.error(request, 'User does not exist.')
+        else:
+            messages.error(request, 'Invalid form data.')
+    else:
+        form = LoginForm()
+
+    return render(request, 'music_beta/login.html', {'form': form})
+
+def logout_view(request):
+    """
+    View function for user logout.
+    """
+    # Clear session data
+    if 'user_id' in request.session:
+        del request.session['user_id']
+    if 'username' in request.session:
+        del request.session['username']
+    if 'user_type' in request.session:
+        del request.session['user_type']
+
+    messages.success(request, 'You have been logged out successfully.')
+    return redirect('home')
+
+def client_dashboard(request):
+    """
+    View function for the client dashboard.
+    Only accessible to users with user_type='client'.
+    """
+    # Check if user is logged in and is a client
+    if 'user_id' not in request.session:
+        messages.error(request, 'You must be logged in to view your dashboard.')
+        return redirect('login')
+
+    user_id = request.session['user_id']
+    try:
+        user = User.objects.get(id=user_id)
+        if user.user_type != 'client':
+            messages.error(request, 'You must be a client to access this page.')
+            return redirect('home')
+    except User.DoesNotExist:
+        messages.error(request, 'User not found.')
+        return redirect('login')
+
+    # Get user's campaigns
+    campaigns = ClientCampaign.objects.filter(user=user).order_by('-created_at')
+
+    # Get or create user's cart
+    cart, created = Cart.objects.get_or_create(user=user)
+
+    context = {
+        'user': user,
+        'campaigns': campaigns,
+        'cart': cart,
+    }
+
+    return render(request, 'music_beta/client_dashboard.html', context)
+
+def campaign_detail(request, campaign_id):
+    """
+    View function for campaign detail.
+    Only accessible to the campaign owner.
+    """
+    # Check if user is logged in
+    if 'user_id' not in request.session:
+        messages.error(request, 'You must be logged in to view campaign details.')
+        return redirect('login')
+
+    user_id = request.session['user_id']
+    try:
+        user = User.objects.get(id=user_id)
+    except User.DoesNotExist:
+        messages.error(request, 'User not found.')
+        return redirect('login')
+
+    # Get campaign and check ownership
+    campaign = get_object_or_404(ClientCampaign, id=campaign_id)
+    if campaign.user.id != user.id:
+        messages.error(request, 'You do not have permission to view this campaign.')
+        return redirect('client_dashboard')
+
+    context = {
+        'user': user,
+        'campaign': campaign,
+    }
+
+    return render(request, 'music_beta/campaign_detail.html', context)
+
+def create_campaign(request):
+    """
+    View function for creating a new campaign.
+    Only accessible to users with user_type='client'.
+    """
+    # Check if user is logged in and is a client
+    if 'user_id' not in request.session:
+        messages.error(request, 'You must be logged in to create a campaign.')
+        return redirect('login')
+
+    user_id = request.session['user_id']
+    try:
+        user = User.objects.get(id=user_id)
+        if user.user_type != 'client':
+            messages.error(request, 'You must be a client to create a campaign.')
+            return redirect('home')
+    except User.DoesNotExist:
+        messages.error(request, 'User not found.')
+        return redirect('login')
+
+    # Handle form submission
+    if request.method == 'POST':
+        form = ClientCampaignForm(request.POST)
+        if form.is_valid():
+            campaign = form.save(commit=False)
+            campaign.user = user
+            campaign.save()
+            messages.success(request, 'Campaign created successfully.')
+            return redirect('campaign_detail', campaign_id=campaign.id)
+    else:
+        form = ClientCampaignForm()
+
+    context = {
+        'user': user,
+        'form': form,
+    }
+
+    return render(request, 'music_beta/create_campaign.html', context)
+
+def edit_campaign(request, campaign_id):
+    """
+    View function for editing a campaign.
+    Only accessible to the campaign owner.
+    """
+    # Check if user is logged in
+    if 'user_id' not in request.session:
+        messages.error(request, 'You must be logged in to edit a campaign.')
+        return redirect('login')
+
+    user_id = request.session['user_id']
+    try:
+        user = User.objects.get(id=user_id)
+    except User.DoesNotExist:
+        messages.error(request, 'User not found.')
+        return redirect('login')
+
+    # Get campaign and check ownership
+    campaign = get_object_or_404(ClientCampaign, id=campaign_id)
+    if campaign.user.id != user.id:
+        messages.error(request, 'You do not have permission to edit this campaign.')
+        return redirect('client_dashboard')
+
+    # Handle form submission
+    if request.method == 'POST':
+        form = ClientCampaignForm(request.POST, instance=campaign)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Campaign updated successfully.')
+            return redirect('campaign_detail', campaign_id=campaign.id)
+    else:
+        form = ClientCampaignForm(instance=campaign)
+
+    context = {
+        'user': user,
+        'campaign': campaign,
+        'form': form,
+    }
+
+    return render(request, 'music_beta/edit_campaign.html', context)
+
+def add_to_cart(request, track_id):
+    """
+    View function for adding a track to the cart.
+    Only accessible to users with user_type='client'.
+    """
+    # Check if user is logged in and is a client
+    if 'user_id' not in request.session:
+        messages.error(request, 'You must be logged in to add tracks to your cart.')
+        return redirect('login')
+
+    user_id = request.session['user_id']
+    try:
+        user = User.objects.get(id=user_id)
+        if user.user_type != 'client':
+            messages.error(request, 'You must be a client to add tracks to your cart.')
+            return redirect('home')
+    except User.DoesNotExist:
+        messages.error(request, 'User not found.')
+        return redirect('login')
+
+    # Get or create user's cart
+    cart, created = Cart.objects.get_or_create(user=user)
+
+    # Get track and add to cart
+    track = get_object_or_404(Track, id=track_id)
+    cart.tracks.add(track)
+    cart.save()
+
+    messages.success(request, f'"{track.title}" has been added to your cart.')
+
+    # Redirect back to the referring page or to the music platform
+    referer = request.META.get('HTTP_REFERER')
+    if referer:
+        return redirect(referer)
+    else:
+        return redirect('music_platform')
+
+def remove_from_cart(request, track_id):
+    """
+    View function for removing a track from the cart.
+    Only accessible to the cart owner.
+    """
+    # Check if user is logged in
+    if 'user_id' not in request.session:
+        messages.error(request, 'You must be logged in to remove tracks from your cart.')
+        return redirect('login')
+
+    user_id = request.session['user_id']
+    try:
+        user = User.objects.get(id=user_id)
+    except User.DoesNotExist:
+        messages.error(request, 'User not found.')
+        return redirect('login')
+
+    # Get user's cart
+    try:
+        cart = Cart.objects.get(user=user)
+    except Cart.DoesNotExist:
+        messages.error(request, 'Cart not found.')
+        return redirect('client_dashboard')
+
+    # Get track and remove from cart
+    track = get_object_or_404(Track, id=track_id)
+    cart.tracks.remove(track)
+    cart.save()
+
+    messages.success(request, f'"{track.title}" has been removed from your cart.')
+
+    # Redirect back to the referring page or to the client dashboard
+    referer = request.META.get('HTTP_REFERER')
+    if referer:
+        return redirect(referer)
+    else:
+        return redirect('client_dashboard')

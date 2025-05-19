@@ -49,6 +49,39 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'service_request' %}">Request Services</a>
                     </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="legalDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Legal
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="legalDropdown">
+                            <li><a class="dropdown-item" href="{% url 'copyright_request' %}">Copyright Request</a></li>
+                            <li><a class="dropdown-item" href="{% url 'download_copyright_boilerplate' %}">Download Copyright Template</a></li>
+                        </ul>
+                    </li>
+                    {% if request.session.user_id %}
+                        {% if request.session.user_type == 'artist' %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'artist_profile' %}">Artist Dashboard</a>
+                        </li>
+                        {% elif request.session.user_type == 'client' %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'client_dashboard' %}">Client Dashboard</a>
+                        </li>
+                        {% endif %}
+                        <li class="nav-item">
+                            <span class="nav-link">Hello, {{ request.session.username }}</span>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'login' %}">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'signup' %}">Register</a>
+                        </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>

@@ -245,7 +245,15 @@ class User(models.Model):
         agreed_to_privacy (bool): Whether user agreed to privacy policy.
         receive_marketing (bool): Whether user opted to receive marketing emails.
         agreement_date (datetime): Timestamp when user agreed to terms/privacy policies.
+        user_type (str): Type of user - 'client' or 'artist'.
+        is_active (bool): Whether the user account is active.
+        last_login (datetime): Timestamp of the user's last login.
     """
+    USER_TYPE_CHOICES = [
+        ('client', 'Client'),
+        ('artist', 'Artist'),
+    ]
+
     username = models.CharField(max_length=100, unique=True)
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=100)  # Warning: Use hashed passwords in production!
@@ -255,6 +263,11 @@ class User(models.Model):
     agreed_to_privacy = models.BooleanField(default=False, help_text='User has agreed to Privacy Policy')
     receive_marketing = models.BooleanField(default=False, help_text='User has opted in to marketing emails')
     agreement_date = models.DateTimeField(null=True, blank=True, help_text='When the user agreed to terms')
+
+    user_type = models.CharField(max_length=10, choices=USER_TYPE_CHOICES, default='client', 
+                                help_text='Type of user - client or artist')
+    is_active = models.BooleanField(default=True, help_text='Whether the user account is active')
+    last_login = models.DateTimeField(null=True, blank=True, help_text='When the user last logged in')
 
     def __str__(self):
         return self.username
@@ -339,3 +352,49 @@ class Copyright(models.Model):
         return f"{self.holder} ({self.year or 'Year Unknown'}) - {self.license_type or 'License Info'}"
 
 
+class ClientCampaign(models.Model):
+    """
+    Represents a client's ad campaign with selected tracks.
+
+    Fields:
+        user (ForeignKey): The client user who owns this campaign.
+        name (CharField): Name of the campaign.
+        description (TextField): Description of the campaign.
+        budget (DecimalField): Budget for the campaign.
+        start_date (DateField): Start date of the campaign.
+        end_date (DateField): End date of the campaign.
+        tracks (ManyToManyField): Tracks selected for this campaign.
+        created_at (DateTimeField): When the campaign was created.
+        updated_at (DateTimeField): When the campaign was last updated.
+    """
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='client_campaigns')
+    name = models.CharField(max_length=200)
+    description = models.TextField(blank=True)
+    budget = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    start_date = models.DateField(null=True, blank=True)
+    end_date = models.DateField(null=True, blank=True)
+    tracks = models.ManyToManyField(Track, related_name='in_campaigns', blank=True)
+    created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.name} - {self.user.username}"
+
+
+class Cart(models.Model):
+    """
+    Represents a client's shopping cart for tracks.
+
+    Fields:
+        user (ForeignKey): The client user who owns this cart.
+        tracks (ManyToManyField): Tracks in the cart.
+        created_at (DateTimeField): When the cart was created.
+        updated_at (DateTimeField): When the cart was last updated.
+    """
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='cart')
+    tracks = models.ManyToManyField(Track, related_name='in_carts', blank=True)
+    created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.user.username}'s Cart"

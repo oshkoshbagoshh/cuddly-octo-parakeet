@@ -12,3 +12,7 @@ python-dotenv>=1.0.0
 
 # Mutagen for ID3 metadata extraction
 mutagen>=1.47.0
+
+djangorestframework~=3.16.0
+dotenv~=0.9.9
+reportlab~=4.4.1

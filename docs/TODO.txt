@@ -74,6 +74,29 @@
  - id3 metadata is collected when songs uploaded
 
 
+#========================
+ TODO: May 19th, 10AM Sprint
+#=========================
+
 - handle image / media renaming
 - rewrite test, seed data / faker with new models
 - rewrite doc strings, comments, etc.
+- ERROR: when signing up, need to "agree to terms and services, but nothing pops up"
+- flashes / toasts explaining what's happening
+- improve the audio player so that it's near the footer, or floating
+- test out tag / filtering system
+- upload video tests
+- blog app , with latest posts
+- need to add admin view to legal
+- add legal urls / routes to the workflow when adding tracks, albums
+- genre hierarchies (electronic: house, etc )
+- artist portal app:
+    - bandzoogle html
+    - what data / pages we need
+    - wordpress musician theme example
+    - data we need:
+        - artist name, artist profile pic, shows/releases, contact (socials, email, etc ), featured song, playlist: "artist spotlight of top 5", copyright
+        - option to book / contact within our artist portal (use zoom / google meet / slack webhook url for now)
+        - user signup form / login & logout for artists (upload fields from model, etc. ) then create views and update REST API
+        - use fallback artist_picture.svg if they can't / don't upload profile pic
+

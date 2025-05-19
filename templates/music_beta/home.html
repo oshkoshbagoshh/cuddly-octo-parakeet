@@ -86,6 +86,19 @@
                                 {{ signup_form.confirm_password }}
                                 <div id="password-mismatch" class="invalid-feedback" style="display: none;">Passwords do not match.</div>
                             </div>
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="id_agree_terms">
+                                <label class="form-check-label" for="id_agree_terms">
+                                    I agree to the <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">Terms and Conditions and Privacy Policy</a>
+                                </label>
+                                <div class="invalid-feedback">You must agree to the terms and conditions.</div>
+                            </div>
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="id_receive_marketing">
+                                <label class="form-check-label" for="id_receive_marketing">
+                                    I would like to receive marketing emails about new features and promotions
+                                </label>
+                            </div>
                             <button type="submit" class="btn btn-primary">Sign Up</button>
                         </form>
                     </div>
@@ -434,4 +447,56 @@
         </div>
     </div>
 </section>
+<!-- Terms and Conditions Modal -->
+<div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="termsModalLabel">Terms and Conditions & Privacy Policy</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h4>Terms and Conditions</h4>
+                <p>Welcome to TFN Media. By using our services, you agree to comply with and be bound by the following terms and conditions:</p>
+
+                <h5>1. Acceptance of Terms</h5>
+                <p>By accessing or using TFN Media's services, you agree to be bound by these Terms and Conditions. If you do not agree to these terms, please do not use our services.</p>
+
+                <h5>2. User Accounts</h5>
+                <p>When you create an account with us, you must provide accurate and complete information. You are responsible for maintaining the confidentiality of your account and password and for restricting access to your computer.</p>
+
+                <h5>3. Content</h5>
+                <p>Users may upload content to our platform. By doing so, you grant TFN Media a non-exclusive, royalty-free license to use, reproduce, and distribute your content in connection with our services.</p>
+
+                <h5>4. Prohibited Activities</h5>
+                <p>You agree not to use our services for any illegal or unauthorized purpose. You must not violate any laws in your jurisdiction.</p>
+
+                <h5>5. Termination</h5>
+                <p>We reserve the right to terminate or suspend your account and access to our services at our sole discretion, without notice, for conduct that we believe violates these Terms and Conditions or is harmful to other users, us, or third parties, or for any other reason.</p>
+
+                <h4 class="mt-4">Privacy Policy</h4>
+                <p>TFN Media is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and disclose information about you.</p>
+
+                <h5>1. Information We Collect</h5>
+                <p>We collect information you provide directly to us, such as when you create an account, upload content, or contact us. This may include your name, email address, and other personal information.</p>
+
+                <h5>2. How We Use Your Information</h5>
+                <p>We use your information to provide, maintain, and improve our services, to communicate with you, and to comply with legal obligations.</p>
+
+                <h5>3. Information Sharing</h5>
+                <p>We may share your information with third-party service providers who perform services on our behalf, such as hosting, data analysis, and customer service.</p>
+
+                <h5>4. Data Security</h5>
+                <p>We take reasonable measures to help protect your personal information from loss, theft, misuse, and unauthorized access.</p>
+
+                <h5>5. Your Choices</h5>
+                <p>You can access, update, or delete your account information at any time by logging into your account or contacting us.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="agreeTermsBtn" data-bs-dismiss="modal">I Agree</button>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

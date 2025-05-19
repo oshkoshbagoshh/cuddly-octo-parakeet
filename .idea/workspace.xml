@@ -7,11 +7,7 @@
     <list default="true" id="13be34ff-8b15-4b10-9803-6b03f1fd25b4" name="Changes" comment="Add new One-sheet Banner SVG for website&#10;&#10;This commit introduces a new SVG file named 'One-sheet Banner (Website).svg' to the static images folder. It will be used as a banner image on the website.">
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/f323fb80-1315-44dd-82ba-78edc0a116db.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/f323fb80-1315-44dd-82ba-78edc0a116db.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/music_beta/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/music_beta/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/music_beta/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/music_beta/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/music_beta/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/music_beta/tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/music_beta/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/music_beta/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/music_beta/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/music_beta/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/TODO.txt" beforeDir="false" afterPath="$PROJECT_DIR$/docs/TODO.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,6 +28,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="dev/refactor" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -68,7 +69,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.pycharm.django.structure.promotion.once.per.project": "true",
     "django.template.preview.state": "SHOW_EDITOR_AND_PREVIEW",
-    "git-widget-placeholder": "dev/refactor",
+    "git-widget-placeholder": "main",
     "junie.onboarding.icon.badge.shown": "true",
     "last_opened_file_path": "/Users/aj/PycharmProjects/tfn_ctv/media/tracks",
     "list.type.of.created.stylesheet": "CSS",

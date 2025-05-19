@@ -17,13 +17,13 @@ This document contains a detailed list of actionable improvement tasks for the T
 8. [ ] Design and implement proper data models for the application:
    - [ ] Create User model or extend Django's built-in User model
    - [ ] Create Service model to store service information
-   - [ ] Create Testimonial model for client testimonials
    - [ ] Create Blog model for blog posts
    - [ ] Create Contact model to store contact form submissions
 9. [ ] Set up database migrations
 10. [ ] Implement model validation for all models
 11. [ ] Add indexes to frequently queried fields
 12. [ ] Consider moving to PostgreSQL for production use
+13. [ ] psycopg, binary, queries, triggers, views
 
 ## Backend Improvements
 

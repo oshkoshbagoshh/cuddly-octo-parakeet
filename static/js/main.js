@@ -55,6 +55,18 @@ document.addEventListener('DOMContentLoaded', function() {
     // Make toast function globally available
     window.showToast = showToast;
 
+    // Terms and Conditions Modal functionality
+    const agreeTermsBtn = document.getElementById('agreeTermsBtn');
+    if (agreeTermsBtn) {
+        agreeTermsBtn.addEventListener('click', function() {
+            const agreeTermsCheckbox = document.getElementById('id_agree_terms');
+            if (agreeTermsCheckbox) {
+                agreeTermsCheckbox.checked = true;
+                showToast('You have agreed to the Terms and Conditions', 'success');
+            }
+        });
+    }
+
     // Scroll to top functionality
     const scrollToTopBtn = document.getElementById('scroll-to-top');
     if (scrollToTopBtn) {
@@ -714,3 +726,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 });
+
+
+// TODO: modal for sign up / registration / terms of service
+// TODO: music player

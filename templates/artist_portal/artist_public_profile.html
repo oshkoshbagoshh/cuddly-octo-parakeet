@@ -1,0 +1,235 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ user.username }} - Artist Profile - TFN Music{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Artist Profile</h4>
+                </div>
+                <div class="card-body text-center">
+                    <img src="{{ profile.profile_picture_url }}" alt="{{ user.username }}" class="img-fluid rounded-circle mb-3" style="max-width: 200px;">
+                    <h3>{{ user.username }}</h3>
+                    
+                    {% if profile.contact_email %}
+                    <p><i class="bi bi-envelope"></i> {{ profile.contact_email }}</p>
+                    {% endif %}
+                    
+                    {% if profile.phone %}
+                    <p><i class="bi bi-telephone"></i> {{ profile.phone }}</p>
+                    {% endif %}
+                    
+                    {% if profile.website %}
+                    <p><i class="bi bi-globe"></i> <a href="{{ profile.website }}" target="_blank">{{ profile.website }}</a></p>
+                    {% endif %}
+                    
+                    <div class="mt-3">
+                        {% if profile.facebook %}
+                        <a href="{{ profile.facebook }}" target="_blank" class="btn btn-outline-primary me-2"><i class="bi bi-facebook"></i></a>
+                        {% endif %}
+                        
+                        {% if profile.twitter %}
+                        <a href="{{ profile.twitter }}" target="_blank" class="btn btn-outline-primary me-2"><i class="bi bi-twitter"></i></a>
+                        {% endif %}
+                        
+                        {% if profile.instagram %}
+                        <a href="{{ profile.instagram }}" target="_blank" class="btn btn-outline-primary me-2"><i class="bi bi-instagram"></i></a>
+                        {% endif %}
+                        
+                        {% if profile.spotify %}
+                        <a href="{{ profile.spotify }}" target="_blank" class="btn btn-outline-success me-2"><i class="bi bi-spotify"></i></a>
+                        {% endif %}
+                        
+                        {% if profile.soundcloud %}
+                        <a href="{{ profile.soundcloud }}" target="_blank" class="btn btn-outline-warning me-2"><i class="bi bi-soundwave"></i></a>
+                        {% endif %}
+                        
+                        {% if profile.youtube %}
+                        <a href="{{ profile.youtube }}" target="_blank" class="btn btn-outline-danger"><i class="bi bi-youtube"></i></a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-8">
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">About</h4>
+                </div>
+                <div class="card-body">
+                    {% if profile.bio %}
+                    <p>{{ profile.bio }}</p>
+                    {% else %}
+                    <p class="text-muted">No bio available.</p>
+                    {% endif %}
+                </div>
+            </div>
+            
+            {% if profile.featured_track %}
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Featured Track</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img src="{{ profile.featured_track.album.cover_image_url }}" alt="{{ profile.featured_track.album.title }}" class="img-fluid rounded">
+                        </div>
+                        <div class="col-md-8">
+                            <h5>{{ profile.featured_track.title }}</h5>
+                            <p>Album: {{ profile.featured_track.album.title }}</p>
+                            <p>Duration: {{ profile.featured_track.duration }}</p>
+                            {% if profile.featured_track.audio_file %}
+                            <audio controls class="w-100">
+                                <source src="{{ profile.featured_track.audio_file.url }}" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
+                            {% endif %}
+                            
+                            {% if request.session.user_type == 'client' %}
+                            <div class="mt-3">
+                                <a href="{% url 'add_to_cart' profile.featured_track.id %}" class="btn btn-success">Add to Cart</a>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Tracks</h4>
+                </div>
+                <div class="card-body">
+                    {% if tracks %}
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Album</th>
+                                    <th>Duration</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for track in tracks %}
+                                <tr>
+                                    <td>{{ track.title }}</td>
+                                    <td>{{ track.album.title }}</td>
+                                    <td>{{ track.duration }}</td>
+                                    <td>
+                                        {% if track.audio_file %}
+                                        <button class="btn btn-sm btn-primary play-track" data-track-id="{{ track.id }}" data-track-url="{{ track.audio_file.url }}">
+                                            <i class="bi bi-play-fill"></i> Play
+                                        </button>
+                                        {% endif %}
+                                        
+                                        {% if request.session.user_type == 'client' %}
+                                        <a href="{% url 'add_to_cart' track.id %}" class="btn btn-sm btn-success">
+                                            <i class="bi bi-cart-plus"></i> Add to Cart
+                                        </a>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% else %}
+                    <p class="text-center">This artist doesn't have any tracks yet.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if tracks %}
+<!-- Audio Player -->
+<div id="audio-player-container" class="fixed-bottom bg-dark text-white p-3" style="display: none;">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-4">
+                <h5 id="now-playing-title" class="mb-0"></h5>
+                <p id="now-playing-artist" class="mb-0 text-muted">{{ user.username }}</p>
+            </div>
+            <div class="col-md-6">
+                <audio id="audio-player" controls class="w-100">
+                    <source src="" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+            <div class="col-md-2 text-end">
+                <button id="close-player" class="btn btn-sm btn-outline-light">
+                    <i class="bi bi-x-lg"></i> Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const playerContainer = document.getElementById('audio-player-container');
+        const player = document.getElementById('audio-player');
+        const nowPlayingTitle = document.getElementById('now-playing-title');
+        const closePlayerBtn = document.getElementById('close-player');
+        const playButtons = document.querySelectorAll('.play-track');
+        
+        // Play track when button is clicked
+        playButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const trackId = this.getAttribute('data-track-id');
+                const trackUrl = this.getAttribute('data-track-url');
+                const trackTitle = this.closest('tr').querySelector('td:first-child').textContent;
+                
+                player.src = trackUrl;
+                nowPlayingTitle.textContent = trackTitle;
+                playerContainer.style.display = 'block';
+                player.play();
+                
+                // Update play count
+                fetch(`/update-play-count/${trackId}/`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': getCookie('csrftoken')
+                    }
+                });
+            });
+        });
+        
+        // Close player when close button is clicked
+        closePlayerBtn.addEventListener('click', function() {
+            player.pause();
+            playerContainer.style.display = 'none';
+        });
+        
+        // Function to get CSRF token from cookies
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+    });
+</script>
+{% endif %}
+{% endblock %}

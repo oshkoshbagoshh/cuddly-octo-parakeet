@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Genre, Artist, Album, Track, ServiceRequest, User, AdCampaign
+from .models import Genre, Artist, Album, Track, ServiceRequest, User, AdCampaign, Copyright
 
 
 @admin.register(Genre)
@@ -62,3 +62,11 @@ class UserAdmin(admin.ModelAdmin):
     # list_filter = ('is_active', 'is_staff', 'is_superuser', 'date_joined')
     ordering = ('username',)
     readonly_fields = ('date_joined',)
+
+# legal
+@admin.register(Copyright)
+class CopyrightAdmin(admin.ModelAdmin):
+    pass
+    # TODO : add administrative views for copyright management
+
+

@@ -1,0 +1,6 @@
+Artist ID,Name,Contact Email,Phone Number,Status,Genre,Location,Manager/Agent,Demo Submission Date,Demo Link,Notes,Last Contacted Date,Follow-up Date,Source
+1,Jane Doe,jane@example.com,555-1234,Current Artist,Pop,New York,John Smith,2024-01-15,http://example.com/demo1.mp3,Top performer,2024-04-10,2024-05-01,Referral
+2,The Rising Band,risingband@example.com,555-5678,Potential,Rock,Los Angeles,,2024-03-20,,Promising new band,2024-04-01,2024-04-20,Event
+3,Sam Solo,sam.solo@example.com,555-8765,Demo Submission,Hip-Hop,Chicago,Mary Jones,2024-04-05,http://example.com/demo2.mp3,Needs follow-up,2024-04-06,2024-04-15,Online Submission
+4,Luna Star,luna.star@example.com,555-4321,Current Artist,Electronic,Berlin,Alex Turner,,,"High potential for collaboration",2024-03-15,2024-04-10,Social Media
+5,Echo Beats,echo.beats@example.com,555-2468,Potential,Indie,London,,2024-02-28,http://example.com/demo3.mp3,Awaiting feedback,2024-03-10,2024-03-25,Scouting Event

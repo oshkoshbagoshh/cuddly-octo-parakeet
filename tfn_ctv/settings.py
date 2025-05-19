@@ -52,8 +52,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'music_beta.apps.MusicBetaConfig',
+    'artist_portal.apps.ArtistPortalConfig',
     'whitenoise.runserver_nostatic',
-    'bootstrap5'
+    'bootstrap5',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
