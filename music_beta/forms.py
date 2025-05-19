@@ -65,51 +65,7 @@ class UserSignupForm(forms.Form):
 
         return cleaned_data
 
-class AdCampaignForm(forms.Form):
-    """Form for ad campaign upload."""
-    title = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Campaign Title'}))
-    description = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Campaign Description', 'rows': 3}))
-    video = forms.FileField(widget=forms.FileInput(attrs={'class': 'form-control', 'accept': 'video/*'}), required=False)
-    # youtube_url = forms.URLField(required=False, widget=forms.URLInput(attrs={'class': 'form-control', 'placeholder': 'YouTube URL (preferred)'}))
-    video_url = forms.URLField(required=False, widget=forms.URLInput(attrs={'class': 'form-control', 'placeholder': 'Video URL (preferred)'}))
-    genre = forms.ModelChoiceField(queryset=Genre.objects.all(), widget=forms.Select(attrs={'class': 'form-control'}))
-    mood = forms.ChoiceField(choices=[
-        ('', 'Select Mood'),
-        ('happy', 'Happy'),
-        ('sad', 'Sad'),
-        ('energetic', 'Energetic'),
-        ('calm', 'Calm'),
-        ('inspirational', 'Inspirational'),
-        ('dramatic', 'Dramatic')
-    ], widget=forms.Select(attrs={'class': 'form-control'}))
-    target_audience = forms.ChoiceField(choices=[
-        ('', 'Select Target Audience'),
-        ('general', 'General'),
-        ('youth', 'Youth'),
-        ('adults', 'Adults'),
-        ('seniors', 'Seniors'),
-        ('professionals', 'Professionals')
-    ], widget=forms.Select(attrs={'class': 'form-control'}))
-
-    def clean(self):
-        """Validate the form data."""
-        cleaned_data = super().clean()
-        video = cleaned_data.get('video')
-        youtube_url = cleaned_data.get('youtube_url')
-
-        # Check if either video or youtube_url is provided
-        if not video and not youtube_url:
-            raise forms.ValidationError("Either a video file or YouTube URL must be provided.")
-
-        # Check if both video and youtube_url are provided
-        if video and youtube_url:
-            raise forms.ValidationError("Please provide either a video file or YouTube URL, not both.")
-
-        # Check video file size (max 50MB)
-        if video and video.size > 50 * 1024 * 1024:  # 50MB in bytes
-            raise forms.ValidationError("Video file size must be less than 50MB. Please use a YouTube URL for larger videos.")
-
-        return cleaned_data
+# AdCampaignForm removed as per requirements - users only need to browse music
 
 class TrackForm(forms.ModelForm):
     """Form for track creation/editing."""
@@ -130,9 +86,40 @@ class TrackForm(forms.ModelForm):
         })
     )
 
+    # Add BPM field
+    bpm = forms.FloatField(
+        required=False,  # Not required as it can be extracted from the audio file
+        widget=forms.NumberInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'BPM (e.g., 120.5)',
+            'step': '0.01'
+        })
+    )
+
+    # Add key field
+    key = forms.CharField(
+        max_length=10,
+        required=False,  # Not required as it can be extracted from the audio file
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Key (e.g., C major)'
+        })
+    )
+
+    # Add mood field
+    mood = forms.CharField(
+        max_length=100,
+        required=False,  # Not required as it can be extracted from the audio file
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Mood/Emotion'
+        })
+    )
+
     class Meta:
         model = Track
-        fields = ['title', 'album', 'artist', 'audio_file', 'duration', 'year', 'genre_tag', 'composer', 'track_number']
+        fields = ['title', 'album', 'artist', 'audio_file', 'duration', 'year', 
+                 'genre_tag', 'composer', 'track_number', 'bpm', 'key', 'mood']
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Track Title'}),
             'album': forms.Select(attrs={'class': 'form-control'}),
@@ -185,18 +172,60 @@ class TrackForm(forms.ModelForm):
                 if 'sample_rate' in metadata:
                     instance.sample_rate = metadata['sample_rate']
 
+                # New fields from librosa analysis
+                if not instance.bpm and 'bpm' in metadata:
+                    instance.bpm = metadata['bpm']
+
+                if not instance.key and 'key' in metadata:
+                    instance.key = metadata['key']
+
+                if not instance.mood and 'mood' in metadata:
+                    instance.mood = metadata['mood']
+
+        # Ensure copyright is set
+        if not instance.copyright:
+            # Create a new Copyright instance with default values
+            from .models import Copyright
+            copyright_instance = Copyright.objects.create()
+            instance.copyright = copyright_instance
+
         if commit:
             instance.save()
 
         return instance
 
 # copyright form
-class CopyrightForm(forms.Form):
-    holder = forms.CharField(max_length=255, label="Copyright Holder")
-    license_type = forms.CharField(max_length=255, required=False, label="License Type")
-    year = forms.IntegerField(required=False, label="Year")
-    additional_notes = forms.CharField(widget=forms.Textarea, required=False, label="Additional Notes")
-    email = forms.EmailField(label="Your Email")
+class CopyrightForm(forms.ModelForm):
+    """Form for copyright information."""
+    class Meta:
+        model = Copyright
+        fields = ['license_type', 'license_url', 'credits', 'document']
+        widgets = {
+            'license_type': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'License Type'}),
+            'license_url': forms.URLInput(attrs={'class': 'form-control', 'placeholder': 'License URL'}),
+            'credits': forms.Textarea(attrs={'class': 'form-control', 'rows': 3, 'placeholder': 'Credits/Notes'}),
+            'document': forms.FileInput(attrs={'class': 'form-control'}),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Add a note explaining that copyright holder is always the organization
+        self.fields['license_type'].help_text = "Copyright holder is always set to our organization."
+
+    def save(self, commit=True):
+        """Override save method to ensure holder is always set to the organization."""
+        instance = super().save(commit=False)
+        # Ensure holder is always set to the organization
+        instance.holder = "TFN Music"
+        # Set year to current year if not provided
+        if not instance.year:
+            from django.utils import timezone
+            instance.year = timezone.now().year
+
+        if commit:
+            instance.save()
+
+        return instance
 
 class LoginForm(forms.Form):
     """Form for user login."""
@@ -207,23 +236,4 @@ class LoginForm(forms.Form):
                                     widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}),
                                     label='Remember me')
 
-class ClientCampaignForm(forms.ModelForm):
-    """Form for client campaign management."""
-    class Meta:
-        model = ClientCampaign
-        fields = ['name', 'description', 'budget', 'start_date', 'end_date']
-        widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Campaign Name'}),
-            'description': forms.Textarea(attrs={'class': 'form-control', 'rows': 3, 'placeholder': 'Campaign Description'}),
-            'budget': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Budget', 'min': '0', 'step': '0.01'}),
-            'start_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
-            'end_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'})
-        }
-
-    def clean(self):
-        cleaned_data = super().clean()
-        start_date = cleaned_data.get('start_date')
-        end_date = cleaned_data.get('end_date')
-
-        if start_date and end_date and start_date > end_date:
-            raise forms.ValidationError("End date must be after start date.")
+# ClientCampaignForm removed as per requirements - users only need to browse music

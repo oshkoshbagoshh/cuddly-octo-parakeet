@@ -55,20 +55,7 @@ def track_audio_path(instance, filename):
     return os.path.join('tracks', filename)
 
 
-def ad_video_path(instance, filename):
-    """
-    Generate a unique file path for advertisement campaign videos.
-
-    Args:
-        instance (Model instance): The AdCampaign model instance.
-        filename (str): The original filename of the uploaded video.
-
-    Returns:
-        str: The file path with a UUID as filename inside 'ads' directory.
-    """
-    ext = filename.split('.')[-1]
-    filename = f"{uuid.uuid4()}.{ext}"
-    return os.path.join('ads', filename)
+# ad_video_path function removed as AdCampaign model is no longer needed
 
 
 class ServiceRequest(models.Model):
@@ -210,9 +197,9 @@ class Track(models.Model):
         track_number (str): Track number from ID3 metadata.
         bitrate (int): Bitrate of audio in kbps.
         sample_rate (int): Sample rate of audio in Hz.
-        # TODO: BPM
-        # TODO: key
-
+        bpm (float): Beats per minute of the track.
+        key (str): Musical key of the track.
+        mood (str): Mood/emotion of the track from DEAM dataset.
     """
     title = models.CharField(max_length=200, help_text='Enter the track title')
     album = models.ForeignKey(Album, on_delete=models.CASCADE, related_name='tracks')
@@ -229,6 +216,14 @@ class Track(models.Model):
     track_number = models.CharField(max_length=10, blank=True, null=True, help_text='Track number from ID3 tag')
     bitrate = models.IntegerField(blank=True, null=True, help_text='Bitrate in kbps')
     sample_rate = models.IntegerField(blank=True, null=True, help_text='Sample rate in Hz')
+
+    # Audio analysis fields (from librosa)
+    bpm = models.FloatField(blank=True, null=True, help_text='Beats per minute')
+    key = models.CharField(max_length=10, blank=True, null=True, help_text='Musical key (e.g. C major, A minor)')
+
+    # DEAM dataset mood field
+    # Placeholder for DEAM dataset integration
+    mood = models.CharField(max_length=100, blank=True, null=True, help_text='Mood/emotion from DEAM dataset')
 
     # legal
     copyright = models.ForeignKey('Copyright', on_delete=models.SET_NULL, null=True, blank=True, related_name='tracks')
@@ -280,75 +275,25 @@ class User(AbstractUser):
                                 help_text='Type of user - client or artist')
 
 
-class AdCampaign(models.Model):
-    # TODO: edit the AdCampaign model and remove video, target audience, etc.
-    """
-    Represents an advertisement campaign with related media and metadata.
-
-    Fields:
-        title (str): Ad campaign title.
-        description (str): Description of the campaign.
-        video (file): Uploaded video file for the campaign.
-        video_url (str): External URL for a public video (preferred if used).
-        genre (ForeignKey): Genre associated with the campaign.
-        mood (str): Mood category selected from predefined options.
-        target_audience (str): Target audience category selected from predefined options.
-        user (ForeignKey): User who created the campaign.
-        created_at (datetime): Timestamp when the campaign was created.
-    """
-    MOOD_CHOICES = [
-        ('happy', 'Happy'),
-        ('sad', 'Sad'),
-        ('energetic', 'Energetic'),
-        ('calm', 'Calm'),
-        ('inspirational', 'Inspirational'),
-        ('dramatic', 'Dramatic'),
-    ]
-
-    TARGET_AUDIENCE_CHOICES = [
-        ('general', 'General'),
-        ('youth', 'Youth'),
-        ('adults', 'Adults'),
-        ('seniors', 'Seniors'),
-        ('professionals', 'Professionals'),
-    ]
-
-    title = models.CharField(max_length=200)
-    description = models.TextField()
-    video = models.FileField(upload_to=ad_video_path, help_text='Video file (max 50MB)', blank=True, null=True)
-    video_url = models.URLField(help_text='Video URL (preferred)', blank=True, null=True)
-    genre = models.ForeignKey(Genre, on_delete=models.SET_NULL, null=True)
-    mood = models.CharField(max_length=20, choices=MOOD_CHOICES)
-    target_audience = models.CharField(max_length=20, choices=TARGET_AUDIENCE_CHOICES)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='ad_campaigns')
-    created_at = models.DateTimeField(default=timezone.now)
-
-    def clean(self):
-        """
-        Ensures validation that either a video file or a video URL is provided,
-        but not both or neither.
-
-        Raises:
-            ValidationError: if validation rules are violated.
-        """
-        if not self.video and not self.video_url:
-            raise ValidationError('Either a video file or Public video URL must be provided.')
-        if self.video and self.video_url:
-            raise ValidationError('Please provide either a video file or Public Video URL, not both.')
-
-    def __str__(self):
-        return self.title
+# AdCampaign model removed as per requirements - users only need to browse music
 
 
 # TODO: add copyright class to models.py for copyright / license of current track / album
     # want to view credits, etc.
 class Copyright(models.Model):
-    """Represents copyright and licensing information for a track or album."""
-    holder = models.CharField(max_length=200, help_text='Name of copyright holder')
+    """
+    Represents copyright and licensing information for a track or album.
+
+    Copyright always belongs to the organization.
+    """
+    # Default holder is the organization
+    holder = models.CharField(max_length=200, default="TFN Music", 
+                             help_text='Name of copyright holder (always our organization)')
     license_type = models.CharField(max_length=200, help_text='License type (e.g. Creative Commons)')
     license_url = models.URLField(blank=True, null=True, help_text='Link to the license or terms')
-    credits = models.TextField(blank=True, null=True,help_text='Credits/notes related to authorship, contributors, etc.')
-    year = models.PositiveIntegerField(blank=True, null=True, help_text='Copyright or License Year')
+    credits = models.TextField(blank=True, null=True, help_text='Credits/notes related to authorship, contributors, etc.')
+    year = models.PositiveIntegerField(default=timezone.now().year, 
+                                      help_text='Copyright or License Year')
     document = models.FileField(upload_to='copyright_docs/', blank=True, null=True,
                                 help_text="Upload copyright/license document PDF")
 
@@ -360,33 +305,7 @@ class Copyright(models.Model):
         return f"{self.holder} ({self.year or 'Year Unknown'}) - {self.license_type or 'License Info'}"
 
 
-class ClientCampaign(models.Model):
-    """
-    Represents a client's ad campaign with selected tracks.
-
-    Fields:
-        user (ForeignKey): The client user who owns this campaign.
-        name (CharField): Name of the campaign.
-        description (TextField): Description of the campaign.
-        budget (DecimalField): Budget for the campaign.
-        start_date (DateField): Start date of the campaign.
-        end_date (DateField): End date of the campaign.
-        tracks (ManyToManyField): Tracks selected for this campaign.
-        created_at (DateTimeField): When the campaign was created.
-        updated_at (DateTimeField): When the campaign was last updated.
-    """
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='client_campaigns')
-    name = models.CharField(max_length=200)
-    description = models.TextField(blank=True)
-    budget = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
-    start_date = models.DateField(null=True, blank=True)
-    end_date = models.DateField(null=True, blank=True)
-    tracks = models.ManyToManyField(Track, related_name='in_campaigns', blank=True)
-    created_at = models.DateTimeField(default=timezone.now)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return f"{self.name} - {self.user.username}"
+# ClientCampaign model removed as per requirements - users only need to browse music
 
 
 class Cart(models.Model):
